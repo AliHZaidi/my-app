@@ -25,15 +25,18 @@ School opening: ${schoolLine}
 Parent history: ${parentHistory.map((entry: { user: string }) => `Parent: ${entry.user}`).join('\n')}
 IRP context: ${irpDescription}
 
-First, respond as the school team to the parent's latest message in a professional, collaborative way.
+First, respond as the school team to the parent's latest message in a way that matches the IRP type (${irpType}). 
+Ask clarifying questions, provide information, or suggest next steps that align with the IRP approach.
+
 
 Then, generate 3 possible next parent responses, each demonstrating a different IRP approach:
 - One focused on interests
 - One focused on rights
 - One focused on power
 
-Then, generate the projected school response to each of these parent options, simulating how the school team would likely respond.
+Ensure that the parent options are not repeats of previous statements, and that they are realistic responses a parent might make in an IEP meeting, and that they move the conversation forward in a meaningful way. Each option should be concise and reflect the parent's perspective based on the IRP type.
 
+Then, generate the projected school response to each of these parent options, simulating how the school team would likely respond, based on the chosen IRP type. Ask clarifying questions, provide information, or suggest next steps that align with the IRP approach.
 Return your output as a JSON object with this shape:
 
 {
@@ -45,9 +48,7 @@ Return your output as a JSON object with this shape:
   ]
 }
 
-Ensure the JSON is valid and well-formed. Do not include any additional text or explanations outside of the JSON structure. Make all responses clear and concise, suitable for an IEP meeting context.
-Each response should be 2 sentences or less, and should meaningfully contribute to the conversation and move it forward.
-
+Ensure the JSON is valid and well-formed. Do not include any additional text or explanations outside of the JSON structure.
 Only output valid JSON.
   `
 
