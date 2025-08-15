@@ -1,0 +1,92 @@
+{
+  "disability_name": "Deaf-Blindness",
+  "working_definition": "Deaf-Blindness is a combination of hearing and visual impairments that causes severe communication, developmental, and educational needs. These impairments are so significant that they cannot be accommodated in special education programs solely for children with deafness or blindness.",
+  "other_names_or_examples_with_definitions": [
+    {
+      "name": "Congenital Deaf-Blindness",
+      "definition": "A condition present at birth or before language is acquired, often due to genetic disorders or prenatal complications."
+    },
+    {
+      "name": "Acquired Deaf-Blindness",
+      "definition": "A condition acquired later in life, such as through illness, injury, or aging-related causes like Usher Syndrome."
+    },
+    {
+      "name": "Usher Syndrome",
+      "definition": "A genetic condition that causes both hearing loss and progressive vision loss."
+    }
+  ],
+  "common_presentations": [
+    "Difficulty accessing spoken or visual information in the classroom",
+    "Limited or unconventional communication methods (e.g., tactile signing, object symbols)",
+    "Needs one-on-one support to navigate environments",
+    "Delayed social interaction or isolation from peers",
+    "Requires specialized instruction for concept development",
+    "Difficulty with orientation and mobility in unfamiliar settings",
+    "Inconsistent response to visual or auditory cues",
+    "Sensory overload in busy or noisy environments",
+    "Strong reliance on touch or physical prompts",
+    "Delayed expressive and receptive language development"
+  ],
+  "accommodations_modifications": [
+    {
+      "name": "Use of tactile symbols or object cues",
+      "how_it_helps": "Supports communication for students with limited vision and hearing",
+      "addresses_presentation": "Limited or unconventional communication methods (e.g., tactile signing, object symbols)",
+      "example": "Student uses a spoon to indicate mealtime and a book to indicate reading"
+    },
+    {
+      "name": "One-on-one intervener support",
+      "how_it_helps": "Facilitates communication, mobility, and learning in all environments",
+      "addresses_presentation": "Needs one-on-one support to navigate environments",
+      "example": "An intervener assists the student during transitions between classes"
+    },
+    {
+      "name": "Provide instruction in tactile sign language or adapted communication system",
+      "how_it_helps": "Enables expressive and receptive communication for students with combined sensory loss",
+      "addresses_presentation": "Delayed expressive and receptive language development",
+      "example": "Teacher uses tactile ASL to deliver lesson instructions"
+    },
+    {
+      "name": "Hands-on, real-life learning experiences",
+      "how_it_helps": "Enhances concept development through direct experience",
+      "addresses_presentation": "Requires specialized instruction for concept development",
+      "example": "Student participates in cooking to understand measurement and sequence"
+    },
+    {
+      "name": "Consistent physical cues for transitions and routines",
+      "how_it_helps": "Reduces confusion and prepares students for changes in activity",
+      "addresses_presentation": "Inconsistent response to visual or auditory cues",
+      "example": "Student receives a tap on the shoulder before transitioning to the next subject"
+    },
+    {
+      "name": "Use of vibrating alerts or tactile timers",
+      "how_it_helps": "Supports independence and time awareness without needing visual or auditory input",
+      "addresses_presentation": "Difficulty accessing spoken or visual information in the classroom",
+      "example": "Student uses a vibrating watch for scheduled tasks"
+    },
+    {
+      "name": "Teach orientation and mobility with specialized tools",
+      "how_it_helps": "Supports safe navigation in and around school",
+      "addresses_presentation": "Difficulty with orientation and mobility in unfamiliar settings",
+      "example": "Student learns to navigate hallways with a mobility cane and guide"
+    },
+    {
+      "name": "Use of consistent peer partners",
+      "how_it_helps": "Supports social connection and builds interaction opportunities",
+      "addresses_presentation": "Delayed social interaction or isolation from peers",
+      "example": "Student is paired with a peer for lunch and recess activities"
+    },
+    {
+      "name": "Environmental modifications for reduced sensory overload",
+      "how_it_helps": "Helps the student focus by limiting sensory distractions",
+      "addresses_presentation": "Sensory overload in busy or noisy environments",
+      "example": "Student works in a quiet corner with soft lighting and minimal clutter"
+    },
+    {
+      "name": "Provide instruction with physical demonstrations",
+      "how_it_helps": "Makes abstract content accessible through tactile experiences",
+      "addresses_presentation": "Difficulty accessing spoken or visual information in the classroom",
+      "example": "Student explores 3D shapes with their hands while learning geometry"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "disability_name": "Deafness",
+  "working_definition": "Deafness is a hearing impairment so severe that the student is impaired in processing linguistic information through hearing, with or without amplification, and it adversely affects educational performance.",
+  "other_names_or_examples_with_definitions": [
+    {
+      "name": "Profound Hearing Loss",
+      "definition": "A complete or near-complete loss of hearing that affects the ability to understand speech even with hearing aids."
+    },
+    {
+      "name": "Sensorineural Hearing Loss",
+      "definition": "A permanent hearing loss resulting from damage to the inner ear or the auditory nerve."
+    },
+    {
+      "name": "Conductive Hearing Loss",
+      "definition": "Hearing loss caused by problems in the outer or middle ear, which may be temporary or treatable."
+    },
+    {
+      "name": "Hard of Hearing",
+      "definition": "A term often used for individuals who have some residual hearing and may benefit from hearing aids or other amplification devices."
+    }
+  ],
+  "common_presentations": [
+    "Limited access to spoken classroom instruction",
+    "Delayed language development",
+    "Difficulty participating in group discussions",
+    "Needs visual supports for understanding lessons",
+    "May miss incidental learning from auditory cues",
+    "Relies on sign language or captioning for communication",
+    "May require amplification devices (e.g., hearing aids, FM systems)",
+    "Difficulty following fast-paced verbal instruction",
+    "May have reduced social interaction with hearing peers",
+    "Requires environmental modifications to reduce background noise"
+  ],
+  "accommodations_modifications": [
+    {
+      "name": "Use of sign language interpreter",
+      "how_it_helps": "Provides real-time access to spoken instruction",
+      "addresses_presentation": "Limited access to spoken classroom instruction",
+      "example": "Interpreter translates the teacher\u2019s speech into sign language during class"
+    },
+    {
+      "name": "Use of real-time captioning (CART)",
+      "how_it_helps": "Enables access to spoken content via written transcription",
+      "addresses_presentation": "Relies on sign language or captioning for communication",
+      "example": "Student views live captions on a tablet during lectures"
+    },
+    {
+      "name": "Preferential seating",
+      "how_it_helps": "Improves ability to see the speaker and visual aids",
+      "addresses_presentation": "Difficulty following fast-paced verbal instruction",
+      "example": "Student sits in the front row to watch the teacher and interpreter"
+    },
+    {
+      "name": "Provide written or visual instructions",
+      "how_it_helps": "Reduces reliance on auditory information",
+      "addresses_presentation": "Needs visual supports for understanding lessons",
+      "example": "Teacher provides step-by-step handouts along with oral instructions"
+    },
+    {
+      "name": "Use of FM or soundfield amplification system",
+      "how_it_helps": "Improves signal-to-noise ratio for students with residual hearing",
+      "addresses_presentation": "May require amplification devices (e.g., hearing aids, FM systems)",
+      "example": "Teacher wears a microphone that transmits directly to student\u2019s receiver"
+    },
+    {
+      "name": "Pre-teaching of vocabulary and concepts",
+      "how_it_helps": "Supports comprehension and language development",
+      "addresses_presentation": "Delayed language development",
+      "example": "Teacher introduces new science terms in advance using visuals"
+    },
+    {
+      "name": "Small group or 1:1 instruction",
+      "how_it_helps": "Allows for repetition, clarification, and individualized support",
+      "addresses_presentation": "Difficulty participating in group discussions",
+      "example": "Student reviews math concepts in a small group setting"
+    },
+    {
+      "name": "Speech-to-text note-taking tools",
+      "how_it_helps": "Captures spoken information for later review",
+      "addresses_presentation": "May miss incidental learning from auditory cues",
+      "example": "Student uses an app that transcribes lessons into written notes"
+    },
+    {
+      "name": "Teach peers basic sign language",
+      "how_it_helps": "Promotes inclusion and social interaction",
+      "addresses_presentation": "May have reduced social interaction with hearing peers",
+      "example": "Classmates learn common signs to communicate during group work"
+    },
+    {
+      "name": "Reduce background noise in learning spaces",
+      "how_it_helps": "Improves hearing clarity for students using amplification devices",
+      "addresses_presentation": "Requires environmental modifications to reduce background noise",
+      "example": "Classroom has carpeting, soft furniture, and acoustic panels"
+    }
+  ]
+}

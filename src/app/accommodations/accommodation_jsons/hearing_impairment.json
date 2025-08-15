@@ -1,0 +1,100 @@
+{
+  "disability_name": "Hearing Impairment",
+  "working_definition": "Hearing Impairment means an impairment in hearing, whether permanent or fluctuating, that adversely affects a child\u2019s educational performance. This category includes conditions that are not severe enough to be classified as Deafness but still impact learning.",
+  "other_names_or_examples_with_definitions": [
+    {
+      "name": "Conductive Hearing Loss",
+      "definition": "A type of hearing loss due to problems with the ear canal, eardrum, or middle ear, often temporary and treatable."
+    },
+    {
+      "name": "Sensorineural Hearing Loss",
+      "definition": "A permanent hearing loss resulting from damage to the inner ear or auditory nerve."
+    },
+    {
+      "name": "Mixed Hearing Loss",
+      "definition": "A combination of conductive and sensorineural hearing loss."
+    },
+    {
+      "name": "Fluctuating Hearing Loss",
+      "definition": "Hearing loss that varies over time due to infections or other temporary conditions."
+    },
+    {
+      "name": "Unilateral Hearing Loss",
+      "definition": "Hearing loss in only one ear, which can still affect learning, especially in noisy environments."
+    }
+  ],
+  "common_presentations": [
+    "Inconsistent response to auditory information",
+    "Difficulty following verbal directions",
+    "Delayed speech or language development",
+    "Needs repetition or clarification during lessons",
+    "Misses parts of classroom discussion or peer conversations",
+    "Better understanding when visual supports are used",
+    "Appears inattentive or off-task due to hearing challenges",
+    "Struggles with phonics and auditory-based reading tasks",
+    "Fatigue from listening effort during long lessons",
+    "Difficulty localizing sounds in group settings"
+  ],
+  "accommodations_modifications": [
+    {
+      "name": "Use of FM or soundfield amplification system",
+      "how_it_helps": "Improves access to auditory instruction by reducing background noise",
+      "addresses_presentation": "Inconsistent response to auditory information",
+      "example": "Teacher wears a microphone that transmits directly to student's receiver"
+    },
+    {
+      "name": "Preferential seating near the teacher",
+      "how_it_helps": "Supports hearing and reduces distractions",
+      "addresses_presentation": "Difficulty following verbal directions",
+      "example": "Student sits in the front row on the teacher\u2019s speaking side"
+    },
+    {
+      "name": "Speech and language therapy",
+      "how_it_helps": "Supports expressive and receptive language development",
+      "addresses_presentation": "Delayed speech or language development",
+      "example": "Student receives weekly sessions with a speech-language pathologist"
+    },
+    {
+      "name": "Teacher repetition and paraphrasing",
+      "how_it_helps": "Ensures comprehension of auditory content",
+      "addresses_presentation": "Needs repetition or clarification during lessons",
+      "example": "Teacher repeats and rephrases questions before asking for responses"
+    },
+    {
+      "name": "Closed captioning on videos",
+      "how_it_helps": "Provides access to spoken content via text",
+      "addresses_presentation": "Misses parts of classroom discussion or peer conversations",
+      "example": "Student watches science videos with captions enabled"
+    },
+    {
+      "name": "Visual supports and written instructions",
+      "how_it_helps": "Reinforces auditory information with visual cues",
+      "addresses_presentation": "Better understanding when visual supports are used",
+      "example": "Student receives written directions for all class assignments"
+    },
+    {
+      "name": "Regular listening checks and comprehension monitoring",
+      "how_it_helps": "Ensures student is understanding and engaged",
+      "addresses_presentation": "Appears inattentive or off-task due to hearing challenges",
+      "example": "Teacher asks student to summarize directions after group instruction"
+    },
+    {
+      "name": "Use of visual phonics or cued speech",
+      "how_it_helps": "Supports decoding and sound-letter recognition",
+      "addresses_presentation": "Struggles with phonics and auditory-based reading tasks",
+      "example": "Student uses hand cues to differentiate similar sounds"
+    },
+    {
+      "name": "Frequent breaks during listening-intensive activities",
+      "how_it_helps": "Reduces cognitive fatigue from sustained listening",
+      "addresses_presentation": "Fatigue from listening effort during long lessons",
+      "example": "Student takes short breaks after every 20-minute lesson segment"
+    },
+    {
+      "name": "Strategic grouping for peer work",
+      "how_it_helps": "Facilitates easier communication and sound localization",
+      "addresses_presentation": "Difficulty localizing sounds in group settings",
+      "example": "Student is placed in small, quiet groups facing one another"
+    }
+  ]
+}

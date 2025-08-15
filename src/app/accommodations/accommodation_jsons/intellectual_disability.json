@@ -1,0 +1,90 @@
+{
+  "disability_name": "Intellectual Disability",
+  "working_definition": "Intellectual Disability refers to significantly subaverage general intellectual functioning, existing concurrently with deficits in adaptive behavior, and manifested during the developmental period. These limitations affect a child's educational performance and ability to meet general life demands.",
+  "other_names_or_examples_with_definitions": [
+    {
+      "name": "Mild Intellectual Disability",
+      "definition": "Students typically have IQs between 50\u201370 and can often learn academic skills up to a 6th-grade level with support."
+    },
+    {
+      "name": "Moderate Intellectual Disability",
+      "definition": "Students may require extensive support for academic and daily living skills and often benefit from functional academic instruction."
+    },
+    {
+      "name": "Severe/Profound Intellectual Disability",
+      "definition": "Individuals require intensive support across all life areas and benefit from highly individualized instruction focused on basic communication and life skills."
+    },
+    {
+      "name": "Global Developmental Delay",
+      "definition": "Used for younger children (under age 5) with significant delay in two or more developmental domains, often leading to a diagnosis of intellectual disability later."
+    }
+  ],
+  "common_presentations": [
+    "Difficulty understanding abstract concepts",
+    "Delayed academic skill development",
+    "Limited problem-solving and reasoning abilities",
+    "Requires frequent repetition and practice",
+    "Challenges with memory and retention",
+    "Struggles with adaptive behavior or life skills",
+    "Needs simplified, step-by-step instructions",
+    "Difficulty generalizing skills to new settings",
+    "Slow processing speed",
+    "Needs support for social interactions and communication"
+  ],
+  "accommodations_modifications": [
+    {
+      "name": "Simplified language and concrete examples",
+      "how_it_helps": "Supports understanding of abstract or complex concepts",
+      "addresses_presentation": "Difficulty understanding abstract concepts",
+      "example": "Teacher uses real-life objects to teach measurement"
+    },
+    {
+      "name": "Modified academic curriculum",
+      "how_it_helps": "Focuses on achievable learning goals tailored to the student's level",
+      "addresses_presentation": "Delayed academic skill development",
+      "example": "Student works on a functional math program instead of grade-level content"
+    },
+    {
+      "name": "Use of manipulatives and visuals",
+      "how_it_helps": "Makes abstract ideas concrete and easier to grasp",
+      "addresses_presentation": "Limited problem-solving and reasoning abilities",
+      "example": "Student uses counters to solve simple addition problems"
+    },
+    {
+      "name": "Daily review and overlearning of skills",
+      "how_it_helps": "Improves memory retention and automaticity",
+      "addresses_presentation": "Requires frequent repetition and practice",
+      "example": "Student practices sight words daily with flashcards"
+    },
+    {
+      "name": "Use of graphic organizers and checklists",
+      "how_it_helps": "Supports memory and task completion",
+      "addresses_presentation": "Challenges with memory and retention",
+      "example": "Student uses a step-by-step checklist to complete writing assignments"
+    },
+    {
+      "name": "Life skills instruction embedded in daily routines",
+      "how_it_helps": "Promotes independence and real-world functioning",
+      "addresses_presentation": "Struggles with adaptive behavior or life skills",
+      "example": "Student practices grocery shopping role-plays in class"
+    },
+    {
+      "name": "Task breakdown into small, manageable steps",
+      "how_it_helps": "Improves comprehension and task completion",
+      "addresses_presentation": "Needs simplified, step-by-step instructions",
+      "example": "Teacher breaks math problems into single-step instructions"
+    },
+    {
+      "name": "Multiple settings for skill practice",
+      "how_it_helps": "Supports generalization of learned skills",
+      "addresses_presentation": "Difficulty generalizing skills to new settings",
+      "example": "Student practices counting at desk and during snack time"
+    },
+    {
+      "name": "Extended time for assignments and tests",
+      "how_it_helps": "Allows for slower cognitive processing",
+      "addresses_presentation": "Slow processing speed",
+      "example": "Student receives 50% more time for classroom assessments"
+    }
+  ]
+}
