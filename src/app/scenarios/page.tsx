@@ -16,6 +16,14 @@ export default function Scenarios() {
     const [sent, setSent] = useState(false)
     const [completedScenarios, setCompletedScenarios] = useState<string[]>([])
 
+    const [showPersonalizeModal, setShowPersonalizeModal] = useState(false)
+    const [personalDetails, setPersonalDetails] = useState({
+        grade: '',
+        disability: '',
+        strengths: '',
+        needs: ''
+    })
+    const [savedPersonalDetails, setSavedPersonalDetails] = useState(false)
     useEffect(() => {
         if (typeof window !== "undefined") {
             const completed = JSON.parse(localStorage.getItem("completedScenarios") || "[]")
@@ -60,7 +68,76 @@ export default function Scenarios() {
                 >
                     Back to Home
                 </Link>
+                <button
+                    className="px-4 py-2 bg-gray-200 dark:bg-gray-800 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
+                    onClick={() => setShowPersonalizeModal(true)}
+                >
+                    Personalize These Scenarios
+                </button>
             </nav>
+
+            {showPersonalizeModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+                    <div className="bg-white dark:bg-gray-900 rounded-2xl p-10 shadow-2xl border border-green-400 max-w-xl w-full relative">
+                        <button
+                            className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 text-2xl"
+                            onClick={() => setShowPersonalizeModal(false)}
+                            aria-label="Close"
+                        >
+                            ×
+                        </button>
+                        <h2 className="text-2xl font-bold text-green-700 mb-4">Personalize Scenarios</h2>
+                        {savedPersonalDetails ? (
+                            <div className="text-green-700 text-lg mb-4">Your details have been saved! Scenarios will be personalized for your child.</div>
+                        ) : (
+                            <form
+                                onSubmit={e => {
+                                    e.preventDefault()
+                                    setSavedPersonalDetails(true)
+                                    setShowPersonalizeModal(false)
+                                    // Optionally, save to localStorage or context for use in scenarios
+                                    localStorage.setItem('personalDetails', JSON.stringify(personalDetails))
+                                }}
+                            >
+                                <label className="block mb-2 font-semibold text-lg">Grade</label>
+                                <input
+                                    className="w-full p-3 border rounded mb-4 text-lg"
+                                    value={personalDetails.grade}
+                                    onChange={e => setPersonalDetails({ ...personalDetails, grade: e.target.value })}
+                                    placeholder="Grade"
+                                />
+                                <label className="block mb-2 font-semibold text-lg">Disability/Diagnosis</label>
+                                <input
+                                    className="w-full p-3 border rounded mb-4 text-lg"
+                                    value={personalDetails.disability}
+                                    onChange={e => setPersonalDetails({ ...personalDetails, disability: e.target.value })}
+                                    placeholder="Disability or diagnosis"
+                                />
+                                <label className="block mb-2 font-semibold text-lg">Strengths</label>
+                                <input
+                                    className="w-full p-3 border rounded mb-4 text-lg"
+                                    value={personalDetails.strengths}
+                                    onChange={e => setPersonalDetails({ ...personalDetails, strengths: e.target.value })}
+                                    placeholder="Strengths"
+                                />
+                                <label className="block mb-2 font-semibold text-lg">Needs/Concerns</label>
+                                <input
+                                    className="w-full p-3 border rounded mb-4 text-lg"
+                                    value={personalDetails.needs}
+                                    onChange={e => setPersonalDetails({ ...personalDetails, needs: e.target.value })}
+                                    placeholder="Needs or concerns"
+                                />
+                                <button
+                                    type="submit"
+                                    className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition"
+                                >
+                                    Save Details
+                                </button>
+                            </form>
+                                             )}
+                    </div>
+                </div>
+            )}
 
             <div className="max-w-6xl mx-auto">
                 <h1 className="text-4xl font-bold mb-4">Practice Scenarios</h1>
@@ -89,31 +166,40 @@ export default function Scenarios() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {paginatedScenarios.map((scenario) => (
                         <div key={scenario.id} className="relative">
-                            <Link
-                                href={`/scenarios/${scenario.id}`}
-                                className="p-6 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400 transition-colors"
-                            >
-                                <div className="flex flex-col h-full">
-                                    <h2 className="text-xl font-semibold mb-2">{scenario.title}</h2>
-                                    <p className="text-gray-600 dark:text-gray-300 mb-4 flex-grow">
-                                        {scenario.description}
-                                    </p>
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <span className={`
+                            <div className="p-6 rounded-lg border-2 border-blue-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400 transition-colors flex flex-col h-full">
+                                <h2 className="text-xl font-semibold mb-2">{scenario.title}</h2>
+                                <p className="text-gray-600 dark:text-gray-300 mb-4 flex-grow">
+                                    {scenario.description}
+                                </p>
+                                <div className="flex items-center gap-2 mb-2">
+                                    <span className={`
                     px-2 py-1 rounded text-sm
                     ${scenario.difficulty === 'Easy' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : ''}
                     ${scenario.difficulty === 'Moderate' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' : ''}
                     ${scenario.difficulty === 'Advanced' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' : ''}
                   `}>
-                                            {scenario.difficulty}
-                                        </span>
-                                    </div>
-                                    <div className="bg-gray-50 dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-                                        <h2 className="text-xl font-semibold mb-4">Background:</h2>
-                                        <p className="text-lg">{scenario.background}</p>
-                                    </div>
+                                        {scenario.difficulty}
+                                    </span>
                                 </div>
-                            </Link>
+                                <div className="bg-gray-50 dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-700 mb-4">
+                                    <h2 className="text-xl font-semibold mb-4">Background:</h2>
+                                    <p className="text-lg">{scenario.background}</p>
+                                </div>
+                                <div className="flex gap-4 mt-2">
+                                    <Link
+                                        href={`/scenarios/${scenario.id}`}
+                                        className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition text-center"
+                                    >
+                                        Advanced Rehearsal
+                                    </Link>
+                                    <Link
+                                        href={`/scenarios/simple?id=${scenario.id}`}
+                                        className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition text-center"
+                                    >
+                                        Simplified Rehearsal
+                                    </Link>
+                                </div>
+                            </div>
                             {completedScenarios.includes(scenario.id) && (
                                 <span className="absolute top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg font-bold text-lg">
                                     Completed

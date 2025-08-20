@@ -89,21 +89,21 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
     }
   }
 
-  // Generate feedback based on IRP usage and outcome
+  // Generate feedback based on response styles and outcome
   const getPerformanceFeedback = () => {
     const stats = getIRPStats()
     let feedback = ""
     if (stats.interestsPct >= 50) {
-      feedback += "You frequently used collaborative, interest-based responses. This often helps build trust and consensus. "
+      feedback += "You often used collaborative responses, focusing on working together and finding common ground with the school team. "
     }
     if (stats.rightsPct >= 30) {
-      feedback += "You asserted your rights when needed, which is important for ensuring your child's legal protections. "
+      feedback += "You made sure to reference your rights and request documentation or clarification when needed, which helps ensure your child's needs are protected. "
     }
     if (stats.powerPct >= 30) {
-      feedback += "You used strong, power-based responses. While this can be effective in some cases, it may also increase tension. "
+      feedback += "You used assertive responses to clearly state your position and push for specific outcomes. This can be effective, but may also increase tension in some situations. "
     }
     if (!feedback) {
-      feedback = "Try to use a mix of approaches—collaboration, rights, and assertiveness—depending on the situation."
+      feedback = "Try to use a mix of approaches—collaboration, asking for your rights, and assertiveness—depending on the situation."
     }
     return feedback
   }
@@ -178,12 +178,17 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
         ])
       }
 
+      const lastSchoolResponse =
+        customHistory.length > 0
+    ? customHistory[customHistory.length - 1].school
+    : scenario.initialSchoolLine;
+
       const res = await fetch('/api/generateSchoolResponseAndOptions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           scenarioBackground: scenario.background,
-          schoolLine: customHistory.length === 0 ? scenario.initialSchoolLine : customHistory[customHistory.length - 1].school,
+          schoolLine: lastSchoolResponse,
           parentHistory: initial
             ? [{ user: parentText, school: '', irpType }]
             : [...customHistory, { user: parentText, school: '', irpType }],
@@ -210,8 +215,6 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
     setSelectedIRP(null)
   }
 
-
-  // (Remove this duplicate declaration of handleOptionSelect)
 
   // Undo last message
   const handleUndo = () => {
@@ -370,9 +373,12 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
       setOutcomeScores(data)
       setPendingOutcomeScores(null)
 
-      // Check for likely outcome
-      const mostLikely = data.find((o: { score: number }) => o.score >= 85)
-      if (mostLikely) {
+      // Find the most likely outcome and check if it's significantly ahead
+      const sorted = [...data].sort((a, b) => b.score - a.score)
+      const mostLikely = sorted[0]
+      const nextLikely = sorted[1]
+      // Show popup if most likely outcome is at least 20% higher than the next highest and above 60%
+      if (mostLikely && mostLikely.score >= 60 && (!nextLikely || mostLikely.score - nextLikely.score >= 20)) {
         setLikelyOutcome(mostLikely)
         setShowLikelyOutcomePopup(true)
       } else {
@@ -490,13 +496,12 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
                   maxHeight: '100%',
                 }}
               >
-                {customHistory.length === 0 && (
-                  <div className="flex mb-10">
-                    <div className="bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-8 py-6 rounded-2xl max-w-3xl text-lg">
-                      <span className="font-bold text-blue-700">School:</span> {scenario.initialSchoolLine}
-                    </div>
+                {/* Always show initial school message at the top */}
+                <div className="flex mb-10">
+                  <div className="bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-8 py-6 rounded-2xl max-w-3xl text-lg">
+                    <span className="font-bold text-blue-700">School:</span> {scenario.initialSchoolLine}
                   </div>
-                )}
+                </div>
                 {customChatBubbles}
               </div>
             </div>
@@ -512,21 +517,6 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
                 <h3 className="font-semibold mb-8 text-3xl text-green-700">Simulation Ended</h3>
                 <p className="mb-8 text-2xl text-gray-700 dark:text-gray-300">Thank you for practicing your advocacy skills!</p>
                 
-                {/* --- Summary Statistics --- */}
-                <div className="mb-8 w-full max-w-xl">
-                  <h4 className="font-bold text-xl mb-2 text-blue-700">Your Conversation Stats</h4>
-                  {(() => {
-                    const stats = getIRPStats()
-                    return (
-                      <ul className="text-lg text-gray-800 dark:text-gray-200 mb-2">
-                        <li>Interest-based responses: <span className="font-bold">{stats.interests} ({stats.interestsPct}%)</span></li>
-                        <li>Rights-based responses: <span className="font-bold">{stats.rights} ({stats.rightsPct}%)</span></li>
-                        <li>Power-based responses: <span className="font-bold">{stats.power} ({stats.powerPct}%)</span></li>
-                        <li>Total turns: <span className="font-bold">{stats.total}</span></li>
-                      </ul>
-                    )
-                  })()}
-                </div>
 
                 {/* --- Feedback --- */}
                 <div className="mb-8 w-full max-w-xl">

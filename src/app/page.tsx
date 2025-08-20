@@ -16,25 +16,15 @@ export default function Home() {
             Empowering parents to confidently participate in their child's IEP meetings
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full mt-10">
+          <div className="w-full mt-10 flex justify-center">
             <a
-              className="flex flex-col items-center p-8 rounded-lg border border-black/[.08] dark:border-white/[.145] hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] transition-colors"
-              href="/accommodations"
-            >
-              <h2 className="text-2xl font-semibold mb-4">Find Accommodations</h2>
-              <p className="text-lg text-gray-600 dark:text-gray-300">
-                Discover suitable accommodations for your child's needs
-              </p>
-            </a>
-
-            <a
-              className="flex flex-col items-center p-8 rounded-lg border border-black/[.08] dark:border-white/[.145] hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] transition-colors"
+              className="flex flex-col items-center p-8 rounded-lg border border-black/[.08] dark:border-white/[.145] hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] transition-colors w-full max-w-xl"
               href="/scenarios"
             >
-              <h2 className="text-2xl font-semibold mb-4">
+              <h2 className="text-3xl font-semibold mb-4">
                 Rehearse Meeting Situations
               </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-300">
+              <p className="text-xl text-gray-600 dark:text-gray-300">
                 Practice common meeting scenarios and build confidence
               </p>
             </a>
@@ -42,7 +32,7 @@ export default function Home() {
         </main>
 
         <div className="w-full max-w-3xl mx-auto p-8 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 my-12">
-          <div className="space-y-6 text-lg text-gray-600 dark:text-gray-400">
+          <div className="space-y-6 text-xl text-gray-600 dark:text-gray-400">
             <p>
               This simulator is for practice purposes only and does not provide legal advice. Always consult with a special education 
               advocate or attorney for specific guidance related to your child's IEP.
@@ -55,7 +45,7 @@ export default function Home() {
           </div>
         </div>
 
-        <footer className="w-full text-center text-lg text-gray-600 dark:text-gray-400 py-6">
+        <footer className="w-full text-center text-xl text-gray-600 dark:text-gray-400 py-6">
           <p>Supporting parents through the IEP process</p>
         </footer>
       </div>

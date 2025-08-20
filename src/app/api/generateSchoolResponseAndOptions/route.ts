@@ -10,6 +10,7 @@ export async function POST(req: NextRequest) {
   if (!OPENAI_API_KEY) {
     return new Response(JSON.stringify({ error: 'OpenAI API key not set' }), { status: 500 })
   }
+  //const lastSchoolResponse = body.lastSchoolResponse || "The school team has not yet responded to the parent's latest message."
 
   const irpDescriptionMap: Record<'interests' | 'rights' | 'power', string> = {
     interests: "The parent is focusing on interests: shared goals, collaboration, and mutual benefit.",
@@ -21,8 +22,8 @@ export async function POST(req: NextRequest) {
   const prompt = `
 You are simulating a realistic IEP meeting as the school team.
 Scenario background: ${scenarioBackground}
-School opening: ${schoolLine}
 Parent history: ${parentHistory.map((entry: { user: string }) => `Parent: ${entry.user}`).join('\n')}
+Previous school response:  ${schoolLine}
 IRP context: ${irpDescription}
 
 First, respond as the school team to the parent's latest message in a way that matches the IRP type (${irpType}). 
@@ -34,7 +35,9 @@ Then, generate 3 possible next parent responses, each demonstrating a different 
 - One focused on rights
 - One focused on power
 
-Ensure that the parent options are not repeats of previous statements, and that they are realistic responses a parent might make in an IEP meeting, and that they move the conversation forward in a meaningful way. Each option should be concise and reflect the parent's perspective based on the IRP type.
+Ensure that the parent options are not repeats of previous statements, and that they move the conversation forward in a meaningful way. Each option should be concise and reflect the parent's perspective based on the IRP type.
+
+**Important:** Each parent response should directly address any questions, requests, or suggestions made in the previous school response. Make the conversation feel natural and connected, as in a real meeting.
 
 Then, generate the projected school response to each of these parent options, simulating how the school team would likely respond, based on the chosen IRP type. Ask clarifying questions, provide information, or suggest next steps that align with the IRP approach.
 Return your output as a JSON object with this shape:
