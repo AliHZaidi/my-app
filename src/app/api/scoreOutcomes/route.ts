@@ -19,7 +19,7 @@ Parent: ${lastExchange.user}
 School: ${lastExchange.school}
 
 Possible outcomes:
-${potentialOutcomes.map((o: any) => `- ${o}`).join('\n')}
+${potentialOutcomes.map((o: string) => `- ${o}`).join('\n')}
 `;
 
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -40,7 +40,7 @@ ${potentialOutcomes.map((o: any) => `- ${o}`).join('\n')}
   })
 
   const data = await response.json()
-  let llmContent = (data.choices?.[0]?.message?.content || '').trim()
+  const llmContent = (data.choices?.[0]?.message?.content || '').trim()
 
   let parsed = null
   try {
@@ -53,7 +53,7 @@ ${potentialOutcomes.map((o: any) => `- ${o}`).join('\n')}
       try {
         parsed = JSON.parse(match[0])
       } catch (e) {
-        return new Response(JSON.stringify({ error: 'Failed to parse extracted JSON array', details: llmContent }), { status: 500 })
+        return new Response(JSON.stringify({ error: 'Failed to parse extracted JSON array: ' + String(e), details: llmContent }), { status: 500 })
       }
     } else {
       return new Response(JSON.stringify({ error: 'No valid JSON array found in LLM output', details: llmContent }), { status: 500 })

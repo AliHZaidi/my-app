@@ -1,5 +1,5 @@
 import { ThemeToggle } from '@/components/ThemeToggle'
-import Image from "next/image"
+import Link from 'next/link'
 
 
 export default function Home() {
@@ -13,11 +13,11 @@ export default function Home() {
             IEP Meeting Prep Simulator
           </h1>
           <p className="text-2xl mb-10">
-            Empowering parents to confidently participate in their child's IEP meetings
+            Empowering parents to confidently participate in IEP meetings
           </p>
 
           <div className="w-full mt-10 flex justify-center">
-            <a
+            <Link
               className="flex flex-col items-center p-8 rounded-lg border border-black/[.08] dark:border-white/[.145] hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] transition-colors w-full max-w-xl"
               href="/scenarios"
             >
@@ -27,7 +27,7 @@ export default function Home() {
               <p className="text-xl text-gray-600 dark:text-gray-300">
                 Practice common meeting scenarios and build confidence
               </p>
-            </a>
+            </Link>
           </div>
         </main>
 
@@ -35,7 +35,7 @@ export default function Home() {
           <div className="space-y-6 text-xl text-gray-600 dark:text-gray-400">
             <p>
               This simulator is for practice purposes only and does not provide legal advice. Always consult with a special education 
-              advocate or attorney for specific guidance related to your child's IEP.
+              advocate or attorney for specific guidance related to IEPs.
             </p>
             <p>
               Currently, this tool focuses on IEP meeting processes. We acknowledge that the special education process 

@@ -35,13 +35,13 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
   const [elapsedTime, setElapsedTime] = useState<number>(0)
   const [showLikelyOutcomePopup, setShowLikelyOutcomePopup] = useState(false)
   const [likelyOutcome, setLikelyOutcome] = useState<{ outcome: string, score: number, explanation: string } | null>(null)
-  const [qualtricsCode, setQualtricsCode] = useState<string | null>(null)
+  //const [qualtricsCode, setQualtricsCode] = useState<string | null>(null)
   const animationTimeout = useRef<NodeJS.Timeout | null>(null)
 
   // Animate school response word by word
   const animateSchoolResponse = (fullText: string, idx: number) => {
     setAnimatedSchoolText('')
-    let words = fullText.split(' ')
+    const words = fullText.split(' ')
     let current = ''
     let i = 0
 
@@ -73,6 +73,7 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
 
   // Generate a summary of IRP types used
   const getIRPStats = () => {
+    console.log(selectedIRP)
     const counts = { interests: 0, rights: 0, power: 0 }
     customHistory.forEach(turn => {
       if (turn.irpType && counts.hasOwnProperty(turn.irpType)) {
@@ -147,7 +148,7 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
     // Generate a simple 6-digit code
     //const code = Math.random().toString(36).substring(2, 8).toUpperCase()
     //setQualtricsCode(code)
-    //logSimulation({ qualtricsCode: code })
+    logSimulation()
   }
 
   // Fetch school response and IRP options from API
@@ -164,6 +165,7 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
 
     try {
       if (plannedSchoolResponse) {
+        console.log(textExplanation)
         const idx = customHistory.length
         setCustomHistory(prev => [
           ...prev,
@@ -210,6 +212,15 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
       }
     } catch (err) {
       setOptions([])
+      setCustomHistory(prev => {
+        const updated = [...prev]
+        updated[updated.length - 1] = {
+          ...updated[updated.length - 1],
+          school: 'Error generating response. Please try again.'
+        }
+        return updated
+      })
+      console.error('Error fetching school response:', err)
     }
     setLoading(false)
     setSelectedIRP(null)
@@ -516,7 +527,9 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
               <div className="bg-gray-100 dark:bg-gray-900 p-12 rounded-3xl border border-gray-300 dark:border-gray-700 flex flex-col items-center h-full">
                 <h3 className="font-semibold mb-8 text-3xl text-green-700">Simulation Ended</h3>
                 <p className="mb-8 text-2xl text-gray-700 dark:text-gray-300">Thank you for practicing your advocacy skills!</p>
-                
+                <div className="mb-4 text-lg text-gray-700 dark:text-gray-300">
+                  Time elapsed: {elapsedTime} seconds
+                </div>
 
                 {/* --- Feedback --- */}
                 <div className="mb-8 w-full max-w-xl">
@@ -535,7 +548,7 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
                 </div>
 
                 {/* --- Qualtrics Code --- */}
-                {qualtricsCode && (
+                {/* {qualtricsCode && (
                   <div className="mb-8 w-full max-w-xl">
                     <h4 className="font-bold text-xl mb-2 text-blue-700">Survey Code</h4>
                     <p className="mb-2 text-lg">To continue in the survey, enter this code in Qualtrics:</p>
@@ -543,7 +556,7 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
                       {qualtricsCode}
                     </div>
                   </div>
-                )}
+                )} */}
 
                 <Link
                   href="/scenarios"

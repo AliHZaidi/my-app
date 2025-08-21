@@ -74,7 +74,7 @@ Only output valid JSON.
     })
 
     const data = await response.json()
-    let llmContent = data.choices?.[0]?.message?.content || ''
+    const llmContent = data.choices?.[0]?.message?.content || ''
 
     // Try to extract JSON if LLM wraps it in extra text
     let jsonString = llmContent
@@ -87,7 +87,7 @@ Only output valid JSON.
     try {
       parsed = JSON.parse(jsonString)
     } catch (e) {
-      return new Response(JSON.stringify({ error: 'Failed to parse LLM output', details: llmContent }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'Failed to parse LLM output: ' + String(e), details: llmContent }), { status: 500 })
     }
 
     return new Response(JSON.stringify(parsed), { status: 200 })
