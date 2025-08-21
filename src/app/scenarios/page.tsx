@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { customScenarios } from '@/data/CustomScenarios'
 
 const scenarios = Object.values(customScenarios)
-const tags = Array.from(new Set(scenarios.map(s => s.category))).filter((tag): tag is string => typeof tag === 'string')
+//const tags = Array.from(new Set(scenarios.map(s => s.category))).filter((tag): tag is string => typeof tag === 'string')
 const SCENARIOS_PER_PAGE = 6
 
 export default function Scenarios() {
