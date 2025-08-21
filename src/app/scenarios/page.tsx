@@ -8,7 +8,7 @@ const tags = Array.from(new Set(scenarios.map(s => s.category))).filter((tag): t
 const SCENARIOS_PER_PAGE = 6
 
 export default function Scenarios() {
-    const [selectedTag, setSelectedTag] = useState<string | null>(null)
+    //const [selectedTag, setSelectedTag] = useState<string | null>(null)
     const [page, setPage] = useState(1)
     const [showSuggestModal, setShowSuggestModal] = useState(false)
     const [suggestText, setSuggestText] = useState('')
@@ -32,9 +32,7 @@ export default function Scenarios() {
     }, [])
 
     // For custom scenarios, use title as tag for filtering (or add a tag field to CustomScenarios if needed)
-    const filteredScenarios = selectedTag
-        ? scenarios.filter(s => s.title === selectedTag)
-        : scenarios
+    const filteredScenarios = scenarios
 
     const totalPages = Math.ceil(filteredScenarios.length / SCENARIOS_PER_PAGE)
     const paginatedScenarios = filteredScenarios.slice(
@@ -42,10 +40,6 @@ export default function Scenarios() {
         page * SCENARIOS_PER_PAGE
     )
 
-    const handleTag = (tag: string | null) => {
-        setSelectedTag(tag)
-        setPage(1)
-    }
 
     const handleSendSuggestion = async () => {
         setSending(true)
@@ -145,23 +139,6 @@ export default function Scenarios() {
                     Select a scenario to practice handling common IEP meeting situations
                 </p>
 
-                <div className="mb-6 flex flex-wrap gap-2">
-                    <button
-                        onClick={() => handleTag(null)}
-                        className={`px-3 py-1 rounded-full border ${selectedTag === null ? 'bg-blue-500 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200'}`}
-                    >
-                        All
-                    </button>
-                    {tags.map(tag => (
-                        <button
-                            key={tag}
-                            onClick={() => handleTag(tag)}
-                            className={`px-3 py-1 rounded-full border ${selectedTag === tag ? 'bg-blue-500 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200'}`}
-                        >
-                            {tag}
-                        </button>
-                    ))}
-                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {paginatedScenarios.map((scenario) => (
