@@ -37,6 +37,7 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
   const [likelyOutcome, setLikelyOutcome] = useState<{ outcome: string, score: number, explanation: string } | null>(null)
   //const [qualtricsCode, setQualtricsCode] = useState<string | null>(null)
   const animationTimeout = useRef<NodeJS.Timeout | null>(null)
+  const [showOptions, setShowOptions] = useState(false)
 
   // Animate school response word by word
   const animateSchoolResponse = (fullText: string, idx: number) => {
@@ -408,11 +409,13 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
   // Update handleInitialOptionSelect and handleOptionSelect to call fetchScores after updating history
   const handleInitialOptionSelect = (option: { type: string; text: string; likelySchoolResponse?: string }) => {
     setInitialSelected(true)
+    setShowOptions(false)
     fetchSchoolResponseAndOptions(option.text, option.type, true, option.likelySchoolResponse)
     setTimeout(fetchScores, 500) // slight delay to ensure history is updated
   }
 
   const handleOptionSelect = (option: { type: string; text: string; likelySchoolResponse?: string }) => {
+    setShowOptions(false)
     fetchSchoolResponseAndOptions(option.text, option.type, false, option.likelySchoolResponse)
     setTimeout(fetchScores, 500)
   }
@@ -527,9 +530,6 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
               <div className="bg-gray-100 dark:bg-gray-900 p-12 rounded-3xl border border-gray-300 dark:border-gray-700 flex flex-col items-center h-full">
                 <h3 className="font-semibold mb-8 text-3xl text-green-700">Simulation Ended</h3>
                 <p className="mb-8 text-2xl text-gray-700 dark:text-gray-300">Thank you for practicing your advocacy skills!</p>
-                <div className="mb-4 text-lg text-gray-700 dark:text-gray-300">
-                  Time elapsed: {elapsedTime} seconds
-                </div>
 
                 {/* --- Feedback --- */}
                 <div className="mb-8 w-full max-w-xl">
@@ -547,17 +547,7 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
                   </ul>
                 </div>
 
-                {/* --- Qualtrics Code --- */}
-                {/* {qualtricsCode && (
-                  <div className="mb-8 w-full max-w-xl">
-                    <h4 className="font-bold text-xl mb-2 text-blue-700">Survey Code</h4>
-                    <p className="mb-2 text-lg">To continue in the survey, enter this code in Qualtrics:</p>
-                    <div className="text-3xl font-mono bg-white dark:bg-gray-800 px-8 py-4 rounded-lg border border-blue-400 text-blue-700 select-all">
-                      {qualtricsCode}
-                    </div>
-                  </div>
-                )} */}
-
+                {/* --- Qualtrics Code, Back to Scenarios, etc. --- */}
                 <Link
                   href="/scenarios"
                   className="px-10 py-5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors inline-block text-2xl"
@@ -566,7 +556,29 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
                 </Link>
               </div>
             ) : (
-              <div className="h-full flex flex-col">{initialOptionsBox}</div>
+              <div className="h-full flex flex-col">
+                {!showOptions ? (
+                  <div className="relative flex flex-col items-center justify-center bg-gray-200 dark:bg-gray-800 rounded-2xl border border-gray-300 dark:border-gray-700 p-12 mb-6 opacity-80">
+                    <div className="absolute inset-0 bg-gray-200 dark:bg-gray-800 opacity-80 rounded-2xl pointer-events-none" />
+                    <div className="relative z-10 flex flex-col items-center">
+                      <h3 className="text-2xl font-semibold mb-6 text-gray-700 dark:text-gray-200 text-center">
+                        Read the school response, and think about how you might respond.
+                      </h3>
+                      <p className="text-lg mb-8 text-gray-600 dark:text-gray-300 text-center">
+                        When you are ready to see the next options, click the button below.
+                      </p>
+                      <button
+                        className="px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold text-xl hover:bg-blue-700 transition"
+                        onClick={() => setShowOptions(true)}
+                      >
+                        See responses
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  initialOptionsBox
+                )}
+              </div>
             )}
           </div>
         </div>
