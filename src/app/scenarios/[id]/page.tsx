@@ -466,6 +466,11 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
     }
   }
 
+  useEffect(() => {
+    if (simulationEnded) {
+      console.log('Elapsed time (seconds):', elapsedTime)
+    }
+  }, [simulationEnded, elapsedTime])
 
   return (
     <div className="min-h-screen p-8 bg-gray-50 dark:bg-gray-900">
