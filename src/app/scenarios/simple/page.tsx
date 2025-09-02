@@ -1,9 +1,9 @@
 'use client'
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { simpleScenarios } from '@/data/SimpleScenarios' // Create this file with your static scenario data
 
-export default function SimpleScenarioPage() {
+function SimpleScenarioPage() {
   const searchParams = useSearchParams()
   const scenarioId = searchParams.get('id')
   const scenario = simpleScenarios[scenarioId || '']
@@ -86,5 +86,13 @@ export default function SimpleScenarioPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function SimpleScenarioPageWrapper() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SimpleScenarioPage />
+    </Suspense>
   )
 }
