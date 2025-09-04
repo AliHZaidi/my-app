@@ -4,11 +4,20 @@ import { useEffect, useState } from 'react'
 import { customScenarios } from '@/data/CustomScenarios'
 
 const scenarios = Object.values(customScenarios)
-//const tags = Array.from(new Set(scenarios.map(s => s.category))).filter((tag): tag is string => typeof tag === 'string')
 const SCENARIOS_PER_PAGE = 6
 
+const difficultyExplanations: Record<string, string> = {
+  Easy: "Easy scenarios involve straightforward situations and basic advocacy skills.",
+  Moderate: "Moderate scenarios include some complexity and require more nuanced responses.",
+  Advanced: "Advanced scenarios present challenging situations that require strong advocacy and problem-solving."
+}
+
+const rehearsalExplanations = {
+  advanced: "Advanced Rehearsal simulates a realistic, interactive meeting with dynamic responses and feedback.",
+  simplified: "Simplified Rehearsal guides you through a series of multiple-choice questions with instant feedback."
+}
+
 export default function Scenarios() {
-    //const [selectedTag, setSelectedTag] = useState<string | null>(null)
     const [page, setPage] = useState(1)
     const [showSuggestModal, setShowSuggestModal] = useState(false)
     const [suggestText, setSuggestText] = useState('')
@@ -16,14 +25,6 @@ export default function Scenarios() {
     const [sent, setSent] = useState(false)
     const [completedScenarios, setCompletedScenarios] = useState<string[]>([])
 
-    const [showPersonalizeModal, setShowPersonalizeModal] = useState(false)
-    const [personalDetails, setPersonalDetails] = useState({
-        grade: '',
-        disability: '',
-        strengths: '',
-        needs: ''
-    })
-    const [savedPersonalDetails, setSavedPersonalDetails] = useState(false)
     useEffect(() => {
         if (typeof window !== "undefined") {
             const completed = JSON.parse(localStorage.getItem("completedScenarios") || "[]")
@@ -31,7 +32,6 @@ export default function Scenarios() {
         }
     }, [])
 
-    // For custom scenarios, use title as tag for filtering (or add a tag field to CustomScenarios if needed)
     const filteredScenarios = scenarios
 
     const totalPages = Math.ceil(filteredScenarios.length / SCENARIOS_PER_PAGE)
@@ -39,7 +39,6 @@ export default function Scenarios() {
         (page - 1) * SCENARIOS_PER_PAGE,
         page * SCENARIOS_PER_PAGE
     )
-
 
     const handleSendSuggestion = async () => {
         setSending(true)
@@ -62,83 +61,13 @@ export default function Scenarios() {
                 >
                     Back to Home
                 </Link>
-                <button
-                    className="px-4 py-2 bg-gray-200 dark:bg-gray-800 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
-                    onClick={() => setShowPersonalizeModal(true)}
-                >
-                    Personalize These Scenarios
-                </button>
             </nav>
-
-            {showPersonalizeModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-                    <div className="bg-white dark:bg-gray-900 rounded-2xl p-10 shadow-2xl border border-green-400 max-w-xl w-full relative">
-                        <button
-                            className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 text-2xl"
-                            onClick={() => setShowPersonalizeModal(false)}
-                            aria-label="Close"
-                        >
-                            ×
-                        </button>
-                        <h2 className="text-2xl font-bold text-green-700 mb-4">Personalize Scenarios</h2>
-                        {savedPersonalDetails ? (
-                            <div className="text-green-700 text-lg mb-4">Your details have been saved! Scenarios will be personalized for your child.</div>
-                        ) : (
-                            <form
-                                onSubmit={e => {
-                                    e.preventDefault()
-                                    setSavedPersonalDetails(true)
-                                    setShowPersonalizeModal(false)
-                                    // Optionally, save to localStorage or context for use in scenarios
-                                    localStorage.setItem('personalDetails', JSON.stringify(personalDetails))
-                                }}
-                            >
-                                <label className="block mb-2 font-semibold text-lg">Grade</label>
-                                <input
-                                    className="w-full p-3 border rounded mb-4 text-lg"
-                                    value={personalDetails.grade}
-                                    onChange={e => setPersonalDetails({ ...personalDetails, grade: e.target.value })}
-                                    placeholder="Grade"
-                                />
-                                <label className="block mb-2 font-semibold text-lg">Disability/Diagnosis</label>
-                                <input
-                                    className="w-full p-3 border rounded mb-4 text-lg"
-                                    value={personalDetails.disability}
-                                    onChange={e => setPersonalDetails({ ...personalDetails, disability: e.target.value })}
-                                    placeholder="Disability or diagnosis"
-                                />
-                                <label className="block mb-2 font-semibold text-lg">Strengths</label>
-                                <input
-                                    className="w-full p-3 border rounded mb-4 text-lg"
-                                    value={personalDetails.strengths}
-                                    onChange={e => setPersonalDetails({ ...personalDetails, strengths: e.target.value })}
-                                    placeholder="Strengths"
-                                />
-                                <label className="block mb-2 font-semibold text-lg">Needs/Concerns</label>
-                                <input
-                                    className="w-full p-3 border rounded mb-4 text-lg"
-                                    value={personalDetails.needs}
-                                    onChange={e => setPersonalDetails({ ...personalDetails, needs: e.target.value })}
-                                    placeholder="Needs or concerns"
-                                />
-                                <button
-                                    type="submit"
-                                    className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition"
-                                >
-                                    Save Details
-                                </button>
-                            </form>
-                                             )}
-                    </div>
-                </div>
-            )}
 
             <div className="max-w-6xl mx-auto">
                 <h1 className="text-4xl font-bold mb-4">Practice Scenarios</h1>
                 <p className="text-2xl mb-8 text-gray-600 dark:text-gray-300">
-                    Select a scenario to practice handling common IEP meeting situations
+                    Select a scenario to practice handling common IEP meeting situations. Hover over the difficulty level or rehearsal type for more information.
                 </p>
-
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {paginatedScenarios.map((scenario) => (
@@ -149,14 +78,20 @@ export default function Scenarios() {
                                     {scenario.description}
                                 </p>
                                 <div className="flex items-center gap-2 mb-2">
-                                    <span className={`
-                    px-2 py-1 rounded text-sm
-                    ${scenario.difficulty === 'Easy' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : ''}
-                    ${scenario.difficulty === 'Moderate' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' : ''}
-                    ${scenario.difficulty === 'Advanced' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' : ''}
-                  `}>
-                                        {scenario.difficulty}
+                                  <span
+                                    className={`
+                                      px-2 py-1 rounded text-sm relative group
+                                      ${scenario.difficulty === 'Easy' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : ''}
+                                      ${scenario.difficulty === 'Moderate' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' : ''}
+                                      ${scenario.difficulty === 'Advanced' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' : ''}
+                                    `}
+                                    tabIndex={0}
+                                  >
+                                    {scenario.difficulty}
+                                    <span className="absolute left-1/2 -translate-x-1/2 mt-2 z-10 hidden group-hover:block group-focus:block bg-gray-800 text-white text-base rounded px-4 py-3 shadow-lg whitespace-nowrap font-semibold">
+                                      {difficultyExplanations[scenario.difficulty]}
                                     </span>
+                                  </span>
                                 </div>
                                 <div className="bg-gray-50 dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-700 mb-4">
                                     <h2 className="text-xl font-semibold mb-4">Background:</h2>
@@ -165,22 +100,45 @@ export default function Scenarios() {
                                 <div className="flex gap-4 mt-2">
                                     <Link
                                         href={`/scenarios/${scenario.id}`}
-                                        className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition text-center"
+                                        className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition text-center relative group"
+                                        tabIndex={0}
                                     >
                                         Advanced Rehearsal
+                                        <span className="absolute left-1/2 -translate-x-1/2 mt-2 z-10 hidden group-hover:block group-focus:block bg-gray-800 text-white text-base rounded px-4 py-3 shadow-lg whitespace-nowrap font-semibold">
+                                          {rehearsalExplanations.advanced}
+                                        </span>
                                     </Link>
                                     <Link
                                         href={`/scenarios/simple?id=${scenario.id}`}
-                                        className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition text-center"
+                                        className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition text-center relative group"
+                                        tabIndex={0}
                                     >
                                         Simplified Rehearsal
+                                        <span className="absolute left-1/2 -translate-x-1/2 mt-2 z-10 hidden group-hover:block group-focus:block bg-gray-800 text-white text-base rounded px-4 py-3 shadow-lg whitespace-nowrap font-semibold">
+                                          {rehearsalExplanations.simplified}
+                                        </span>
                                     </Link>
                                 </div>
                             </div>
                             {completedScenarios.includes(scenario.id) && (
-                                <span className="absolute top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg font-bold text-lg">
-                                    Completed
+                              <span
+                                className="absolute top-4 right-4 text-green-600 bg-transparent cursor-default group"
+                                title="Completed"
+                                tabIndex={0}
+                              >
+                                <svg
+                                  className="w-6 h-6"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth={3}
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span className="absolute right-8 top-1/2 -translate-y-1/2 z-10 hidden group-hover:block group-focus:block bg-gray-800 text-white text-base rounded px-4 py-2 shadow-lg whitespace-nowrap font-semibold">
+                                  Completed
                                 </span>
+                              </span>
                             )}
                         </div>
                     ))}

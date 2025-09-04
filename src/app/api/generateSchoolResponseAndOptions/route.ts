@@ -36,6 +36,7 @@ Then, generate 3 possible next parent responses, each demonstrating a different 
 - One focused on power
 
 Ensure that the parent options are not repeats of previous statements, and that they move the conversation forward in a meaningful way. Each option should be concise and reflect the parent's perspective based on the IRP type.
+All responses should be one sentence at most. They should be short and concise. 
 
 **Important:** Each parent response should directly address any questions, requests, or suggestions made in the previous school response. Make the conversation feel natural and connected, as in a real meeting.
 

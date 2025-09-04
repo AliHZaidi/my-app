@@ -18,13 +18,16 @@ export default function Home() {
 
           <div className="w-full mt-10 flex justify-center">
             <Link
-              className="flex flex-col items-center p-8 rounded-lg border border-black/[.08] dark:border-white/[.145] hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] transition-colors w-full max-w-xl"
+              className="flex flex-col items-center p-8 rounded-lg border-2 border-blue-600 dark:border-blue-400 bg-blue-600 dark:bg-blue-700 text-white dark:text-white shadow-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition-colors w-full max-w-xl cursor-pointer focus:outline-none focus:ring-4 focus:ring-blue-300"
               href="/scenarios"
+              role="button"
+              tabIndex={0}
+              aria-label="Rehearse Meeting Situations"
             >
               <h2 className="text-3xl font-semibold mb-4">
                 Rehearse Meeting Situations
               </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-300">
+              <p className="text-xl">
                 Practice common meeting scenarios and build confidence
               </p>
             </Link>

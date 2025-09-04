@@ -21,17 +21,17 @@ export interface CustomScenario {
 export const customScenarios: Record<string, CustomScenario> = {
   'custom-disagreement': {
     id: 'custom-disagreement',
-    title: 'Disagreeing with the Team',
-    description: 'Practice expressing disagreement with the team in a free-form, realistic IEP meeting.',
+    title: 'Disagreeing with the School',
+    description: 'Practice expressing disagreement with the school in a free-form, realistic IEP meeting.',
     difficulty: 'Moderate',
     category: 'Advocacy & Communication', // Broader category
-    background: 'You are in an IEP meeting. The team suggests reducing your child\'s speech therapy, citing "good progress." You disagree based on your observations at home. Respond in your own words and see how the school team reacts.',
+    background: 'You are in an IEP meeting. The school suggests reducing your child\'s speech therapy, citing "good progress." You disagree based on your observations at home.',
     initialSchoolLine: "Thank you for joining us today. We want to discuss your child's progress and our recommendation to reduce speech therapy.",
     initialOptions: [
       {
         type: 'interests',
         text: "I'd like to understand how this change will help my child and work together to find the best solution.",
-        textExplanation: "This response seeks collaboration and focuses on shared goals, inviting the team to work together for the child's benefit."
+        textExplanation: "This response seeks collaboration and focuses on shared goals, inviting the school to work together for the child's benefit."
       },
       {
         type: 'rights',
@@ -45,9 +45,9 @@ export const customScenarios: Record<string, CustomScenario> = {
       }
     ],
     potentialOutcomes: [
-      "The team agrees to maintain current services.",
+      "The school agrees to maintain current services.",
       "A compromise is reached, such as a trial period with additional data collection.",
-      "The team reduces services, but with a plan to revisit soon.",
+      "The school reduces services, but with a plan to revisit soon.",
       "The parent requests mediation or files a formal complaint."
     ]
   },
@@ -57,13 +57,13 @@ export const customScenarios: Record<string, CustomScenario> = {
     description: 'Practice asking for supporting data or documentation in a free-form scenario.',
     difficulty: 'Easy',
     category: 'Advocacy & Documentation', // Broader category
-    background: 'The school team makes a recommendation about your child\'s services. You want to see the data that supports their decision. Respond in your own words.',
+    background: 'The school team makes a recommendation about your child\'s services. You want to see the data that supports their decision.',
     initialSchoolLine: "We recommend adjusting your child's services based on our progress monitoring. How would you like to respond?",
     initialOptions: [
       {
         type: 'interests',
         text: "Can we look at the progress data together to make sure we're all on the same page?",
-        textExplanation: "This response encourages collaboration and transparency, inviting the team to review information together."
+        textExplanation: "This response encourages collaboration and transparency, inviting the school to review information together."
       },
       {
         type: 'rights',
@@ -79,7 +79,7 @@ export const customScenarios: Record<string, CustomScenario> = {
     potentialOutcomes: [
       "The school provides all requested data and documentation.",
       "A meeting is scheduled to review data together.",
-      "The team agrees to delay changes until data is reviewed.",
+      "The school agrees to delay changes until data is reviewed.",
       "The parent escalates the request to district administration."
     ]
   },
@@ -89,7 +89,7 @@ export const customScenarios: Record<string, CustomScenario> = {
     description: 'Practice advocating for your child’s needs as they prepare to transition to a new school or grade.',
     difficulty: 'Moderate',
     category: 'Planning & Change', // Broader category
-    background: 'Your child is moving from elementary to middle school. You are concerned about how their supports will continue in the new environment. Respond to the team’s plan for transition.',
+    background: 'Your child is moving from elementary to middle school. You are concerned about how their supports will continue in the new environment. Respond to the school’s plan for transition.',
     initialSchoolLine: "We have a transition plan in place for your child as they move to middle school. Do you have any questions or concerns?",
     initialOptions: [
       {
@@ -109,7 +109,7 @@ export const customScenarios: Record<string, CustomScenario> = {
       }
     ],
     potentialOutcomes: [
-      "The team agrees to add more details to the transition plan.",
+      "The school agrees to add more details to the transition plan.",
       "A meeting is scheduled with the new school staff.",
       "The parent brings in an advocate for further support.",
       "The transition plan is revised to include additional supports."
@@ -141,7 +141,7 @@ export const customScenarios: Record<string, CustomScenario> = {
       }
     ],
     potentialOutcomes: [
-      "The team agrees to revise the behavior intervention plan.",
+      "The school agrees to revise the behavior intervention plan.",
       "A functional behavior assessment is scheduled.",
       "The school proceeds with disciplinary action.",
       "The parent requests mediation or legal support."
@@ -176,7 +176,7 @@ export const customScenarios: Record<string, CustomScenario> = {
       "The school provides an interpreter or translated materials.",
       "The meeting is paused until communication needs are met.",
       "The parent escalates the issue to the district.",
-      "The team makes extra effort to clarify terms and processes."
+      "The school makes extra effort to clarify terms and processes."
     ]
   },
   'custom-inclusion': {
@@ -185,7 +185,7 @@ export const customScenarios: Record<string, CustomScenario> = {
     description: 'Practice advocating for your child’s participation in general education settings.',
     difficulty: 'Moderate',
     category: 'Inclusion & Placement', // Broader category
-    background: 'The team suggests your child may do better in a separate classroom. You want your child included with peers as much as possible.',
+    background: 'The school suggests your child may do better in a separate classroom. You want your child included with peers as much as possible.',
     initialSchoolLine: "We believe a separate classroom may better meet your child’s needs. What are your thoughts?",
     initialOptions: [
       {
@@ -205,10 +205,10 @@ export const customScenarios: Record<string, CustomScenario> = {
       }
     ],
     potentialOutcomes: [
-      "The team agrees to try additional supports in general education.",
+      "The school agrees to try additional supports in general education.",
       "An independent evaluation is scheduled.",
       "The parent requests mediation.",
-      "The team maintains their recommendation for a separate classroom."
+      "The school maintains their recommendation for a separate classroom."
     ]
   },
   'custom-504-vs-iep': {
@@ -217,7 +217,7 @@ export const customScenarios: Record<string, CustomScenario> = {
     description: 'Practice discussing the differences between a 504 plan and an IEP plan, and advocating for the most appropriate support for your child.',
     difficulty: 'Moderate',
     category: 'Services & Eligibility',
-    background: 'Your child is struggling in school. The team suggests a 504 plan, but you believe your child may need an IEP for more comprehensive support. Respond to the team’s recommendation.',
+    background: 'Your child is struggling in school. The school suggests a 504 plan, but you believe your child may need an IEP for more comprehensive support. Respond to the school’s recommendation.',
     initialSchoolLine: "Based on our review, we think a 504 plan may be sufficient to support your child’s needs. What are your thoughts?",
     initialOptions: [
       {
@@ -237,10 +237,10 @@ export const customScenarios: Record<string, CustomScenario> = {
       }
     ],
     potentialOutcomes: [
-      "The team agrees to conduct a formal evaluation for IEP eligibility.",
+      "The school agrees to conduct a formal evaluation for IEP eligibility.",
       "The parent and school collaborate to compare supports under both plans.",
       "The parent requests an independent evaluation.",
-      "The team maintains their recommendation for a 504 plan."
+      "The school maintains their recommendation for a 504 plan."
     ]
   },
   'custom-cultural-differences': {
@@ -249,7 +249,7 @@ export const customScenarios: Record<string, CustomScenario> = {
     description: 'Practice advocating for your child when cultural differences affect communication and understanding in meetings.',
     difficulty: 'Moderate',
     category: 'Communication & Advocacy',
-    background: 'You feel that cultural differences are impacting how your concerns are understood by the school team. Respond to the team’s feedback.',
+    background: 'You feel that cultural differences are impacting how your concerns are understood by the school team. Respond to the school’s feedback.',
     initialSchoolLine: "We want to make sure we understand your perspective. Is there anything you’d like to share about your family’s background or needs?",
     initialOptions: [
       {
@@ -269,10 +269,10 @@ export const customScenarios: Record<string, CustomScenario> = {
       }
     ],
     potentialOutcomes: [
-      "The team incorporates cultural considerations into the plan.",
+      "The school incorporates cultural considerations into the plan.",
       "A community advocate joins future meetings.",
       "The parent feels more heard and understood.",
-      "The team requests additional training on cultural competence."
+      "The school requests additional training on cultural competence."
     ]
   },
   'custom-transition-to-adulthood': {
@@ -281,7 +281,7 @@ export const customScenarios: Record<string, CustomScenario> = {
     description: 'Practice advocating for your child’s needs as they prepare to transition from high school to adulthood.',
     difficulty: 'Advanced',
     category: 'Transition & Planning',
-    background: 'Your child is approaching graduation, and you want to ensure they have a strong transition plan for adulthood. Respond to the team’s proposed plan.',
+    background: 'Your child is approaching graduation, and you want to ensure they have a strong transition plan for adulthood. Respond to the school’s proposed plan.',
     initialSchoolLine: "We’ve developed a transition plan to help your child prepare for life after high school. Do you have any questions or concerns?",
     initialOptions: [
       {
@@ -301,10 +301,10 @@ export const customScenarios: Record<string, CustomScenario> = {
       }
     ],
     potentialOutcomes: [
-      "The team revises the transition plan to include more supports.",
+      "The school revises the transition plan to include more supports.",
       "Outside agencies are invited to participate.",
       "The parent requests mediation.",
-      "The team maintains their original plan."
+      "The school maintains their original plan."
     ]
   },
   'custom-medical-needs': {
@@ -313,7 +313,7 @@ export const customScenarios: Record<string, CustomScenario> = {
     description: 'Practice advocating for your child’s medical needs and ensuring appropriate supports are in place.',
     difficulty: 'Moderate',
     category: 'Health & Supports',
-    background: 'Your child has a medical condition that requires accommodations at school. Respond to the team’s proposed supports.',
+    background: 'Your child has a medical condition that requires accommodations at school. Respond to the school’s proposed supports.',
     initialSchoolLine: "We’ve reviewed your child’s medical documentation and have some ideas for supports. What are your thoughts?",
     initialOptions: [
       {
@@ -333,10 +333,10 @@ export const customScenarios: Record<string, CustomScenario> = {
       }
     ],
     potentialOutcomes: [
-      "The team agrees to add more medical supports.",
+      "The school agrees to add more medical supports.",
       "A health plan is developed and shared with staff.",
       "The parent requests outside medical consultation.",
-      "The team maintains their proposed supports."
+      "The school maintains their proposed supports."
     ]
   }
 };
