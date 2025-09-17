@@ -70,7 +70,7 @@ Only output valid JSON.
           { role: 'user', content: prompt }
         ],
         max_tokens: 1500,
-        temperature: 0.7
+        temperature: 0.6
       })
     })
 
