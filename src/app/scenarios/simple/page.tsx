@@ -1,7 +1,59 @@
 'use client'
 import { Suspense, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { simpleScenarios } from '@/data/SimpleScenarios' // Create this file with your static scenario data
+import { simpleScenarios } from '@/data/SimpleScenarios'
+
+function SummaryPage({ scenario, selections }: { scenario: any, selections: number[] }) {
+  // Example: Determine a result based on selections (customize as needed)
+  const result = "Based on your responses, you demonstrated thoughtful advocacy and collaboration. You considered both your rights and the importance of working with the school team.";
+
+  // Example: Next steps (customize as needed)
+  const nextSteps = [
+    "Review your child's IEP and make note of any questions or concerns.",
+    "Prepare documentation or examples to support your requests.",
+    "Consider bringing a trusted advocate or support person to meetings.",
+    "Follow up with the school team after meetings to confirm next steps."
+  ];
+
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
+      <div className="max-w-2xl w-full bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
+        <h1 className="text-3xl font-bold mb-6 text-blue-700">Scenario Summary</h1>
+        <p className="mb-8 text-lg text-gray-700 dark:text-gray-300">{scenario.title}</p>
+        <h2 className="text-xl font-semibold mb-4">Your Responses:</h2>
+        <ol className="mb-8 list-decimal pl-6 space-y-4">
+          {scenario.steps.map((step: any, idx: number) => (
+            <li key={idx}>
+              <div className="font-semibold">{step.question}</div>
+              <div className="ml-2 text-blue-900 dark:text-blue-200">{step.answers[selections[idx]]?.text}</div>
+              <div className="ml-2 text-sm mt-1">
+                <span className="font-semibold text-blue-700 dark:text-blue-200">Positive:</span> {step.answers[selections[idx]]?.feedback.positive}
+                <br />
+                <span className="font-semibold text-gray-700 dark:text-gray-300">Consider:</span> {step.answers[selections[idx]]?.feedback.negative}
+              </div>
+            </li>
+          ))}
+        </ol>
+        <h2 className="text-xl font-semibold mb-4">Possible Result:</h2>
+        <div className="mb-8 text-lg text-green-700 dark:text-green-300">{result}</div>
+        <h2 className="text-xl font-semibold mb-4">Next Steps:</h2>
+        <ul className="list-disc pl-6 text-lg text-gray-700 dark:text-gray-200 space-y-2">
+          {nextSteps.map((step, idx) => (
+            <li key={idx}>{step}</li>
+          ))}
+        </ul>
+        <div className="mt-8 flex justify-center">
+          <a
+            href="/scenarios"
+            className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition"
+          >
+            Back to Scenarios
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 function SimpleScenarioPage() {
   const searchParams = useSearchParams()
@@ -11,6 +63,8 @@ function SimpleScenarioPage() {
   const [step, setStep] = useState(0)
   const [selected, setSelected] = useState<number | null>(null)
   const [showFeedback, setShowFeedback] = useState(false)
+  const [selections, setSelections] = useState<number[]>([])
+  const [showSummary, setShowSummary] = useState(false)
 
   if (!scenario) {
     return (
@@ -24,6 +78,10 @@ function SimpleScenarioPage() {
   }
 
   const currentStep = scenario.steps[step]
+
+  if (showSummary) {
+    return <SummaryPage scenario={scenario} selections={selections} />
+  }
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
@@ -67,6 +125,7 @@ function SimpleScenarioPage() {
             <button
               className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition"
               onClick={() => {
+                setSelections([...selections, selected!])
                 setStep(step + 1)
                 setSelected(null)
                 setShowFeedback(false)
@@ -78,7 +137,10 @@ function SimpleScenarioPage() {
           {showFeedback && step === scenario.steps.length - 1 && (
             <button
               className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition"
-              onClick={() => window.location.href = '/scenarios'}
+              onClick={() => {
+                setSelections([...selections, selected!])
+                setShowSummary(true)
+              }}
             >
               Finish
             </button>

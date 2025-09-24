@@ -338,5 +338,133 @@ export const customScenarios: Record<string, CustomScenario> = {
       "The parent requests outside medical consultation.",
       "The school maintains their proposed supports."
     ]
+  },
+  'custom-bullying': {
+    id: 'custom-bullying',
+    title: 'Addressing Bullying Concerns',
+    description: 'Practice advocating for your child when bullying is reported at school.',
+    difficulty: 'Moderate',
+    category: 'Safety & Advocacy',
+    background: 'Your child has reported being bullied at school. You want to ensure the school takes appropriate action and supports your child’s well-being.',
+    initialSchoolLine: "We are aware of your concerns about bullying and want to discuss how we can address this situation.",
+    initialOptions: [
+      {
+        type: 'interests',
+        text: "Can we work together to create a plan that ensures my child feels safe and supported at school?",
+        textExplanation: "This response seeks collaboration and focuses on proactive solutions for your child's safety."
+      },
+      {
+        type: 'rights',
+        text: "I want to know what anti-bullying policies are in place and how the school will ensure my child's rights are protected.",
+        textExplanation: "This response references your child's legal rights and the school's responsibility to provide a safe environment."
+      },
+      {
+        type: 'power',
+        text: "If the bullying continues, I will escalate this to the district and consider involving outside authorities.",
+        textExplanation: "This response asserts your authority and signals you are prepared to take further action if needed."
+      }
+    ],
+    potentialOutcomes: [
+      "The school implements a safety plan and increases supervision.",
+      "A meeting is scheduled with all parties involved.",
+      "The parent escalates the issue to the district.",
+      "The school provides counseling and support services."
+    ]
+  },
+  'custom-transportation': {
+    id: 'custom-transportation',
+    title: 'Transportation Challenges',
+    description: 'Practice advocating for your child’s transportation needs to and from school.',
+    difficulty: 'Easy',
+    category: 'Access & Logistics',
+    background: 'Your child’s IEP includes transportation as a related service, but there have been issues with reliability and safety.',
+    initialSchoolLine: "We understand there have been some transportation issues. Let’s discuss how we can resolve them.",
+    initialOptions: [
+      {
+        type: 'interests',
+        text: "Can we review the transportation plan together and identify ways to improve reliability?",
+        textExplanation: "This response encourages collaboration and problem-solving."
+      },
+      {
+        type: 'rights',
+        text: "My child has a right to safe and reliable transportation as part of their IEP.",
+        textExplanation: "This response references legal entitlements and the school's responsibility."
+      },
+      {
+        type: 'power',
+        text: "If the issues continue, I will file a formal complaint with the district.",
+        textExplanation: "This response asserts your authority and signals you are prepared to escalate if necessary."
+      }
+    ],
+    potentialOutcomes: [
+      "The transportation provider is changed or retrained.",
+      "A new plan is developed to address reliability.",
+      "The parent files a formal complaint.",
+      "The school increases communication about transportation."
+    ]
+  },
+  'custom-technology-access': {
+    id: 'custom-technology-access',
+    title: 'Technology and Accessibility',
+    description: 'Practice advocating for your child’s access to technology and digital learning tools.',
+    difficulty: 'Moderate',
+    category: 'Access & Supports',
+    background: 'Your child needs assistive technology to participate fully in class, but there have been delays in providing the necessary tools.',
+    initialSchoolLine: "We are working on providing the assistive technology your child needs. Let’s discuss the current status and next steps.",
+    initialOptions: [
+      {
+        type: 'interests',
+        text: "Can we set a timeline for when the technology will be available and discuss interim supports?",
+        textExplanation: "This response seeks collaboration and practical solutions while waiting for technology."
+      },
+      {
+        type: 'rights',
+        text: "My child has a right to access the curriculum with appropriate technology as outlined in the IEP.",
+        textExplanation: "This response references legal requirements for accessibility."
+      },
+      {
+        type: 'power',
+        text: "If the technology is not provided soon, I will request compensatory services.",
+        textExplanation: "This response asserts your authority and signals you may seek additional support if delays continue."
+      }
+    ],
+    potentialOutcomes: [
+      "The school expedites the technology order.",
+      "Interim supports are put in place.",
+      "The parent requests compensatory services.",
+      "The school provides training on the new technology."
+    ]
+  },
+  'custom-mental-health': {
+    id: 'custom-mental-health',
+    title: 'Mental Health Supports',
+    description: 'Practice advocating for mental health supports and services for your child.',
+    difficulty: 'Advanced',
+    category: 'Health & Well-being',
+    background: 'Your child has been struggling with anxiety and depression, affecting their school performance. You want to ensure appropriate mental health supports are included in the IEP.',
+    initialSchoolLine: "We understand your concerns about your child's mental health. Let’s discuss what supports might help.",
+    initialOptions: [
+      {
+        type: 'interests',
+        text: "Can we work together to identify supports and accommodations that address my child's mental health needs?",
+        textExplanation: "This response encourages collaboration and a holistic approach to your child's well-being."
+      },
+      {
+        type: 'rights',
+        text: "I want to make sure mental health services are included in the IEP as required by law.",
+        textExplanation: "This response references your child's right to appropriate services under IDEA."
+      },
+      {
+        type: 'power',
+        text: "If my child's needs aren't met, I will seek outside evaluation and support.",
+        textExplanation: "This response asserts your authority and signals you may seek additional help if necessary."
+      }
+    ],
+    potentialOutcomes: [
+      "The IEP is updated to include mental health supports.",
+      "The school provides counseling or referrals.",
+      "The parent seeks outside evaluation.",
+      "The school develops a crisis intervention plan."
+    ]
   }
 };

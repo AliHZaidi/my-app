@@ -14,10 +14,13 @@ const dbPath = path.join(dbDir, 'simulation_logs.db')
 
 // Initialize SQLite database and table if not exists
 const db = new Database(dbPath)
+// Add columns for date and time if not already present
 db.exec(`
   CREATE TABLE IF NOT EXISTS simulation_logs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     timestamp TEXT,
+    date TEXT,
+    time TEXT,
     scenario_id TEXT,
     parent_choices TEXT,
     outcome_scores TEXT,
@@ -43,14 +46,20 @@ export async function POST(req: NextRequest) {
     } = data
 
     const userAgent = req.headers.get('user-agent') || ''
+    const now = new Date()
+    const isoTimestamp = now.toISOString()
+    const date = isoTimestamp.slice(0, 10) // YYYY-MM-DD
+    const time = isoTimestamp.slice(11, 19) // HH:MM:SS
 
     const stmt = db.prepare(`
       INSERT INTO simulation_logs (
-        timestamp, scenario_id, parent_choices, outcome_scores, start_time, end_time, elapsed_seconds, user_agent, meta
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        timestamp, date, time, scenario_id, parent_choices, outcome_scores, start_time, end_time, elapsed_seconds, user_agent, meta
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `)
     stmt.run(
-      new Date().toISOString(),
+      isoTimestamp,
+      date,
+      time,
       scenarioId || null,
       JSON.stringify(parentChoices ?? []),
       JSON.stringify(outcomeScores ?? []),

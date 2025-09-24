@@ -25,7 +25,7 @@ Scenario background: ${scenarioBackground}
 Parent history: ${parentHistory.map((entry: { user: string }) => `Parent: ${entry.user}`).join('\n')}
 Previous school response:  ${schoolLine}
 IRP context: ${irpDescription}
-
+When responding, reference relevant laws (such as IDEA) or best practices if they apply to the situation, in a way that is understandable to parents.
 First, respond as the school team to the parent's latest message in a way that matches the IRP type (${irpType}). 
 Ask clarifying questions, provide information, or suggest next steps that align with the IRP approach.
 
