@@ -1,9 +1,10 @@
 'use client'
 import { Suspense, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { simpleScenarios } from '@/data/SimpleScenarios'
+import { SimpleScenario, simpleScenarios, SimpleScenarioStep } from '@/data/SimpleScenarios'
+import Link from 'next/dist/client/link';
 
-function SummaryPage({ scenario, selections }: { scenario: any, selections: number[] }) {
+function SummaryPage({ scenario, selections }: { scenario: SimpleScenario, selections: number[] }) {
   // Example: Determine a result based on selections (customize as needed)
   const result = "Based on your responses, you demonstrated thoughtful advocacy and collaboration. You considered both your rights and the importance of working with the school team.";
 
@@ -22,7 +23,7 @@ function SummaryPage({ scenario, selections }: { scenario: any, selections: numb
         <p className="mb-8 text-lg text-gray-700 dark:text-gray-300">{scenario.title}</p>
         <h2 className="text-xl font-semibold mb-4">Your Responses:</h2>
         <ol className="mb-8 list-decimal pl-6 space-y-4">
-          {scenario.steps.map((step: any, idx: number) => (
+          {scenario.steps.map((step: SimpleScenarioStep, idx: number) => (
             <li key={idx}>
               <div className="font-semibold">{step.question}</div>
               <div className="ml-2 text-blue-900 dark:text-blue-200">{step.answers[selections[idx]]?.text}</div>
@@ -43,12 +44,12 @@ function SummaryPage({ scenario, selections }: { scenario: any, selections: numb
           ))}
         </ul>
         <div className="mt-8 flex justify-center">
-          <a
+          <Link
             href="/scenarios"
             className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition"
           >
             Back to Scenarios
-          </a>
+          </Link>
         </div>
       </div>
     </div>
