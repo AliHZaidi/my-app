@@ -18,43 +18,44 @@ export async function POST(req: NextRequest) {
     power: "The parent is focusing on power: authority, leverage, or demands."
   };
   const irpDescription = irpDescriptionMap[irpType as 'interests' | 'rights' | 'power'] || "";
+  const lastParentMessage = parentHistory[parentHistory.length - 1]?.user || ''
+  const recentHistory = parentHistory.slice(-2).map((entry: { user: string }) => `Parent: ${entry.user}`).join('\n')
 
   const prompt = `
-You are simulating a realistic IEP meeting as the school team.
+You are simulating a realistic IEP meeting as the school team. Stay in character and keep the conversation focused on IEP topics. DO NOT break character or mention that you are an AI.
+
 Scenario background: ${scenarioBackground}
-Parent history: ${parentHistory.map((entry: { user: string }) => `Parent: ${entry.user}`).join('\n')}
-Previous school response:  ${schoolLine}
+Recent conversation:
+${recentHistory}
+Previous school response: ${schoolLine}
 IRP context: ${irpDescription}
-When responding, reference relevant laws (such as IDEA) or best practices if they apply to the situation, in a way that is understandable to parents.
-First, respond as the school team to the parent's latest message in a way that matches the IRP type (${irpType}). 
-Ask clarifying questions, provide information, or suggest next steps that align with the IRP approach.
 
+Your task:
+1. Carefully read the parent's latest message: "${lastParentMessage}"
+2. Respond as the school team, directly addressing the parent's concerns, questions, or requests. Reference relevant laws (such as IDEA) or best practices if appropriate, in a way that is understandable to parents.
+3. Make your response concise (one or two sentences), realistic, and connected to the conversation so far.
 
-Then, generate 3 possible next parent responses, each demonstrating a different IRP approach:
-- One focused on interests
-- One focused on rights
-- One focused on power
+Next, generate three possible parent responses (one for each IRP type: interests, rights, power) that would be plausible next steps in this conversation. Each option should:
+- Directly address the school team's latest message.
+- Be concise and realistic.
+- Move the conversation forward in a meaningful way.
+- Not repeat previous statements.
 
-Ensure that the parent options are not repeats of previous statements, and that they move the conversation forward in a meaningful way. Each option should be concise and reflect the parent's perspective based on the IRP type.
-All responses should be one sentence at most. They should be short and concise. 
+For each parent option, generate the likely school team response, and provide a brief explanation of the parent option.
 
-**Important:** Each parent response should directly address any questions, requests, or suggestions made in the previous school response. Make the conversation feel natural and connected, as in a real meeting.
-
-Then, generate the projected school response to each of these parent options, simulating how the school team would likely respond, based on the chosen IRP type. Ask clarifying questions, provide information, or suggest next steps that align with the IRP approach.
 Return your output as a JSON object with this shape:
 
 {
   "schoolResponse": "<school response>",
   "options": [
-    { "type": "interests", "text": "<parent option>", "likelySchoolResponse": "<school response to interests option>", "textExplanation": "<explanation of interests option. What the response does, what it emphasizes, and how it moves the conversation forward.>" },
-    { "type": "rights", "text": "<parent option>", "likelySchoolResponse": "<school response to rights option>", "textExplanation": "<explanation of rights option. What the response does, what it emphasizes, and how it moves the conversation forward.>" },
-    { "type": "power", "text": "<parent option>", "likelySchoolResponse": "<school response to power option>", "textExplanation": "<explanation of power option. What the response does, what it emphasizes, and how it moves the conversation forward.>" }
+    { "type": "interests", "text": "<parent option>", "likelySchoolResponse": "<school response to interests option>", "textExplanation": "<explanation of interests option>" },
+    { "type": "rights", "text": "<parent option>", "likelySchoolResponse": "<school response to rights option>", "textExplanation": "<explanation of rights option>" },
+    { "type": "power", "text": "<parent option>", "likelySchoolResponse": "<school response to power option>", "textExplanation": "<explanation of power option>" }
   ]
 }
 
-Ensure the JSON is valid and well-formed. Do not include any additional text or explanations outside of the JSON structure.
 Only output valid JSON.
-  `
+`
 
   try {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {

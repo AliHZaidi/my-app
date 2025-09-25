@@ -38,6 +38,10 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
   //const [qualtricsCode, setQualtricsCode] = useState<string | null>(null)
   const animationTimeout = useRef<NodeJS.Timeout | null>(null)
   const [showOptions, setShowOptions] = useState(false)
+  const [showCustomInput, setShowCustomInput] = useState(false)
+  const [customInput, setCustomInput] = useState('')
+  const [isSending, setIsSending] = useState(false)
+  const [sent, setSent] = useState(false)
 
   // Animate school response word by word
   const animateSchoolResponse = (fullText: string, idx: number) => {
@@ -136,7 +140,7 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
   }
 
   // When simulation ends, generate a code for Qualtrics
-  const handleEndSimulation = () => {
+  const handleEndSimulation = async () => {
     setSimulationEnded(true)
     // Mark scenario as completed in localStorage
     if (typeof window !== "undefined") {
@@ -146,10 +150,8 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
         localStorage.setItem("completedScenarios", JSON.stringify(completed))
       }
     }
-    // Generate a simple 6-digit code
-    //const code = Math.random().toString(36).substring(2, 8).toUpperCase()
-    //setQualtricsCode(code)
-    logSimulation()
+    // Await logSimulation to ensure logging completes
+    await logSimulation()
   }
 
   // Fetch school response and IRP options from API
@@ -161,12 +163,12 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
     textExplanation?: string
   ) => {
     setLoading(true)
-    // Clear previous options immediately so old responses disappear
+    setIsSending(true)
+    setSent(false)
     setOptions([])
 
     try {
       if (plannedSchoolResponse) {
-        console.log(textExplanation)
         const idx = customHistory.length
         setCustomHistory(prev => [
           ...prev,
@@ -174,7 +176,6 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
         ])
         animateSchoolResponse(plannedSchoolResponse, idx)
       } else {
-        // Show "Thinking..." while waiting for API
         setCustomHistory(prev => [
           ...prev,
           { user: parentText, school: 'Thinking...', irpType, animating: false }
@@ -183,8 +184,8 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
 
       const lastSchoolResponse =
         customHistory.length > 0
-    ? customHistory[customHistory.length - 1].school
-    : scenario.initialSchoolLine;
+          ? customHistory[customHistory.length - 1].school
+          : scenario.initialSchoolLine
 
       const res = await fetch('/api/generateSchoolResponseAndOptions', {
         method: 'POST',
@@ -200,7 +201,6 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
       })
       const data = await res.json()
       setOptions(data.options)
-      // If not animating, update school response instantly
       if (!plannedSchoolResponse) {
         setCustomHistory(prev => {
           const updated = [...prev]
@@ -211,6 +211,7 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
           return updated
         })
       }
+      setSent(true)
     } catch (err) {
       setOptions([])
       setCustomHistory(prev => {
@@ -221,10 +222,14 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
         }
         return updated
       })
+      setSent(false)
       console.error('Error fetching school response:', err)
     }
     setLoading(false)
+    setIsSending(false)
     setSelectedIRP(null)
+    setShowCustomInput(false)
+    setCustomInput('')
   }
 
 
@@ -298,7 +303,7 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
                   : handleInitialOptionSelect(option)
               }
               className={`flex-1 px-6 py-4 rounded-2xl text-left transition-colors shadow bg-gray-200 dark:bg-gray-800 text-lg text-gray-900 dark:text-gray-100 hover:bg-blue-100 dark:hover:bg-blue-900`}
-              disabled={loading}
+              disabled={loading || isSending}
             >
               {option.text}
             </button>
@@ -325,30 +330,23 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
             )}
           </div>
         ))}
-        {loading && (
-          <div className="flex items-center mt-6">
-            <span className="animate-pulse text-lg text-blue-700 bg-blue-100 dark:bg-blue-900 px-4 py-3 rounded">
-              Loading next responses...
-            </span>
-          </div>
-        )}
-      </div>
-      <div className="flex gap-4 mt-6">
-        <button
-          type="button"
-          className="bg-gray-400 text-white px-6 py-3 rounded-lg hover:bg-gray-500 transition-colors shadow disabled:opacity-50 text-lg"
-          onClick={handleUndo}
-          disabled={loading || customHistory.length === 0}
-        >
-          Undo Last Message
-        </button>
-        <button
-          type="button"
-          className="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors shadow text-lg"
-          onClick={handleEndSimulation}
-        >
-          End Simulation
-        </button>
+        <div className="flex gap-4 mt-6">
+          <button
+            type="button"
+            className="bg-gray-400 text-white px-6 py-3 rounded-lg hover:bg-gray-500 transition-colors shadow disabled:opacity-50 text-lg"
+            onClick={handleUndo}
+            disabled={loading || isSending || customHistory.length === 0}
+          >
+            Undo Last Message
+          </button>
+          <button
+            type="button"
+            className="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors shadow text-lg"
+            onClick={handleEndSimulation}
+          >
+            End Simulation
+          </button>
+        </div>
       </div>
     </div>
   )
@@ -411,13 +409,13 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
     setInitialSelected(true)
     setShowOptions(false)
     fetchSchoolResponseAndOptions(option.text, option.type, true, option.likelySchoolResponse)
-    setTimeout(fetchScores, 500) // slight delay to ensure history is updated
+    setTimeout(fetchScores, 250) // slight delay to ensure history is updated
   }
 
   const handleOptionSelect = (option: { type: string; text: string; likelySchoolResponse?: string }) => {
     setShowOptions(false)
     fetchSchoolResponseAndOptions(option.text, option.type, false, option.likelySchoolResponse)
-    setTimeout(fetchScores, 500)
+    setTimeout(fetchScores, 250)
   }
 
   // Ensure outcomeScores is initialized at 0 at the start of each scenario
@@ -542,6 +540,21 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
                   <p className="text-lg text-gray-800 dark:text-gray-200">{getPerformanceFeedback()}</p>
                 </div>
 
+                {/* --- Most Likely Outcome --- */}
+                {(() => {
+                  const sorted = [...outcomeScores].sort((a, b) => b.score - a.score)
+                  const mostLikely = sorted[0]
+                  return mostLikely ? (
+                    <div className="mb-8 w-full max-w-xl">
+                      <h4 className="font-bold text-xl mb-2 text-blue-700">Most Likely Outcome</h4>
+                      <p className="text-lg text-gray-800 dark:text-gray-200">
+                        <span className="font-semibold">{mostLikely.outcome}</span> is the most likely result of your conversation, with a likelihood of <span className="font-bold">{mostLikely.score}%</span>.
+                      </p>
+                      <p className="text-base text-gray-700 dark:text-gray-300 mt-2">{mostLikely.explanation}</p>
+                    </div>
+                  ) : null
+                })()}
+
                 {/* --- Next Steps --- */}
                 <div className="mb-8 w-full max-w-xl">
                   <h4 className="font-bold text-xl mb-2 text-blue-700">Suggested Next Steps</h4>
@@ -552,7 +565,6 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
                   </ul>
                 </div>
 
-                {/* --- Qualtrics Code, Back to Scenarios, etc. --- */}
                 <Link
                   href="/scenarios"
                   className="px-10 py-5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors inline-block text-2xl"
