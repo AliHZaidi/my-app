@@ -38,10 +38,10 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
   //const [qualtricsCode, setQualtricsCode] = useState<string | null>(null)
   const animationTimeout = useRef<NodeJS.Timeout | null>(null)
   const [showOptions, setShowOptions] = useState(false)
-  const [showCustomInput, setShowCustomInput] = useState(false)
-  const [customInput, setCustomInput] = useState('')
+  //const [showCustomInput, setShowCustomInput] = useState(false)
+  //const [customInput, setCustomInput] = useState('')
   const [isSending, setIsSending] = useState(false)
-  const [sent, setSent] = useState(false)
+  //const [sent, setSent] = useState(false)
 
   // Animate school response word by word
   const animateSchoolResponse = (fullText: string, idx: number) => {
@@ -160,11 +160,10 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
     irpType: string,
     initial = false,
     plannedSchoolResponse?: string,
-    textExplanation?: string
   ) => {
     setLoading(true)
     setIsSending(true)
-    setSent(false)
+    //setSent(false)
     setOptions([])
 
     try {
@@ -211,7 +210,7 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
           return updated
         })
       }
-      setSent(true)
+      //setSent(true)
     } catch (err) {
       setOptions([])
       setCustomHistory(prev => {
@@ -222,14 +221,14 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
         }
         return updated
       })
-      setSent(false)
+      //setSent(false)
       console.error('Error fetching school response:', err)
     }
     setLoading(false)
     setIsSending(false)
     setSelectedIRP(null)
-    setShowCustomInput(false)
-    setCustomInput('')
+    //setShowCustomInput(false)
+    //setCustomInput('')
   }
 
 
@@ -330,23 +329,30 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
             )}
           </div>
         ))}
-        <div className="flex gap-4 mt-6">
-          <button
-            type="button"
-            className="bg-gray-400 text-white px-6 py-3 rounded-lg hover:bg-gray-500 transition-colors shadow disabled:opacity-50 text-lg"
-            onClick={handleUndo}
-            disabled={loading || isSending || customHistory.length === 0}
-          >
-            Undo Last Message
-          </button>
-          <button
-            type="button"
-            className="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors shadow text-lg"
-            onClick={handleEndSimulation}
-          >
-            End Simulation
-          </button>
-        </div>
+        {loading && (
+          <div className="flex items-center mt-6">
+            <span className="animate-pulse text-lg text-blue-700 bg-blue-100 dark:bg-blue-900 px-4 py-3 rounded">
+              Loading next responses...
+            </span>
+          </div>
+        )}
+      </div>
+      <div className="flex gap-4 mt-6">
+        <button
+          type="button"
+          className="bg-gray-400 text-white px-6 py-3 rounded-lg hover:bg-gray-500 transition-colors shadow disabled:opacity-50 text-lg"
+          onClick={handleUndo}
+          disabled={loading || isSending || customHistory.length === 0}
+        >
+          Undo Last Message
+        </button>
+        <button
+          type="button"
+          className="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors shadow text-lg"
+          onClick={handleEndSimulation}
+        >
+          End Simulation
+        </button>
       </div>
     </div>
   )
