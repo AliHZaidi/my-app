@@ -393,8 +393,8 @@ export default function ScenarioPage({ params }: ScenarioPageProps) {
       const sorted = [...data].sort((a, b) => b.score - a.score)
       const mostLikely = sorted[0]
       const nextLikely = sorted[1]
-      // Show popup if most likely outcome is at least 20% higher than the next highest and above 60%
-      if (mostLikely && mostLikely.score >= 60 && (!nextLikely || mostLikely.score - nextLikely.score >= 20)) {
+      // Show popup if most likely outcome is at least 20% higher than the next highest and above 90%
+      if (mostLikely && mostLikely.score >= 90 && (!nextLikely || mostLikely.score - nextLikely.score >= 20)) {
         setLikelyOutcome(mostLikely)
         setShowLikelyOutcomePopup(true)
       } else {
