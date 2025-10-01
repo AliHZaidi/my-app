@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
   const lastParentMessage = parentHistory[parentHistory.length - 1]?.user || ''
   const recentHistory = parentHistory.slice(-2).map((entry: { user: string }) => `Parent: ${entry.user}`).join('\n')
 
-  const prompt = `
+const prompt = `
 You are simulating a realistic IEP meeting as the school team. Stay in character and keep the conversation focused on IEP topics. DO NOT break character or mention that you are an AI.
 
 Scenario background: ${scenarioBackground}
@@ -32,10 +32,12 @@ IRP context: ${irpDescription}
 
 Your task:
 1. Carefully read the parent's latest message: "${lastParentMessage}"
-2. Respond as the school team, directly addressing the parent's concerns, questions, or requests. Reference relevant laws (such as IDEA) or best practices if appropriate, in a way that is understandable to parents.
-3. Make your response concise (one or two sentences), realistic, and connected to the conversation so far.
+2. Before responding, think step-by-step about the parent's concerns, relevant laws (such as IDEA), best practices, and the context of the conversation so far. Write out your reasoning.
+3. Then, respond as the school team, directly addressing the parent's concerns, questions, or requests. Reference relevant laws or best practices if appropriate, in a way that is understandable to parents.
+4. Make your response concise (one or two sentences), realistic, and connected to the conversation so far.
 
-Next, generate three possible parent responses (one for each IRP type: interests, rights, power) that would be plausible next steps in this conversation. Each option should:
+Next, generate three possible parent responses (one for each IRP type: interests, rights, power) that would be plausible next steps in this conversation. For each option:
+- Think step-by-step about why a parent might choose this response and how it moves the conversation forward.
 - Directly address the school team's latest message.
 - Be concise and realistic.
 - Move the conversation forward in a meaningful way.

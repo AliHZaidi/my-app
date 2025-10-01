@@ -1,11 +1,10 @@
-import { ThemeToggle } from '@/components/ThemeToggle'
 import Link from 'next/link'
 
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
-      <ThemeToggle />
+      {/* <ThemeToggle /> */}
       
       <div className="flex-1 flex flex-col items-center justify-center px-4">
         <main className="w-full max-w-3xl mx-auto flex flex-col gap-[32px] items-center text-center py-16">
