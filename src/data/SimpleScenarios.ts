@@ -870,5 +870,346 @@ export const simpleScenarios: Record<string, SimpleScenario> = {
         ]
       }
     ]
-  }
+  },
+  // Add this to your simpleScenarios object in SimpleScenarios.ts
+
+'custom-bullying': {
+  id: 'custom-bullying',
+  title: 'Addressing Bullying Concerns',
+  background: "Your child has reported being bullied at school. You want to ensure the school takes appropriate action and supports your child’s well-being.",
+  steps: [
+    {
+      question: "The school says: 'We are aware of your concerns about bullying and want to discuss how we can address this situation.' How do you respond?",
+      answers: [
+        {
+          text: "Ask to work together on a safety plan for your child.",
+          feedback: {
+            positive: "Collaborating on a safety plan shows you are proactive and focused on solutions.",
+            negative: "It may take time to develop and implement a plan, and you may need to follow up to ensure it's enforced."
+          }
+        },
+        {
+          text: "Request information about the school's anti-bullying policies.",
+          feedback: {
+            positive: "Knowing the policies helps you understand your child's rights and the school's responsibilities.",
+            negative: "Policies alone may not address your child's immediate needs or feelings of safety."
+          }
+        },
+        {
+          text: "State you will escalate to the district if the issue continues.",
+          feedback: {
+            positive: "Escalating can prompt faster action if previous steps haven't worked.",
+            negative: "It may strain your relationship with the school and could make collaboration harder."
+          }
+        }
+      ]
+    },
+    {
+      question: "The school agrees to create a safety plan and asks what specific concerns you have. What do you do?",
+      answers: [
+        {
+          text: "Share specific incidents and your child's feelings.",
+          feedback: {
+            positive: "Sharing details helps the team understand the situation and tailor the plan to your child's needs.",
+            negative: "It may be difficult to talk about these incidents, and you may feel emotional during the discussion."
+          }
+        },
+        {
+          text: "Request regular check-ins with your child.",
+          feedback: {
+            positive: "Regular check-ins can help monitor your child's well-being and ensure the plan is working.",
+            negative: "This may require extra effort from staff and may not catch every issue."
+          }
+        },
+        {
+          text: "Ask for increased adult supervision in problem areas.",
+          feedback: {
+            positive: "Increased supervision can help prevent further incidents and make your child feel safer.",
+            negative: "Staffing limitations may make this difficult to implement consistently."
+          }
+        }
+      ]
+    },
+    {
+      question: "After a few weeks, your child reports that bullying has decreased, but some issues remain. What is your next step?",
+      answers: [
+        {
+          text: "Request a follow-up meeting to review and adjust the safety plan.",
+          feedback: {
+            positive: "Reviewing and adjusting the plan shows you are committed to ongoing improvement.",
+            negative: "Frequent meetings may be time-consuming and could frustrate the team if not approached collaboratively."
+          }
+        },
+        {
+          text: "Encourage your child to continue reporting any incidents.",
+          feedback: {
+            positive: "Encouraging your child to speak up helps them feel empowered and keeps you informed.",
+            negative: "Your child may feel uncomfortable or fear retaliation, so ongoing support is important."
+          }
+        },
+        {
+          text: "Contact the district office to report ongoing concerns.",
+          feedback: {
+            positive: "Involving the district can bring additional resources and oversight.",
+            negative: "Escalating may strain your relationship with the school and could make collaboration harder."
+          }
+        }
+      ]
+    }
+  ]
+},
+'custom-technology-access': {
+  id: 'custom-technology-access',
+  title: 'Technology and Accessibility',
+  background: "Your child needs assistive technology to participate fully in class, but there have been delays in providing the necessary tools.",
+  steps: [
+    {
+      question: "The school says: 'We are working on providing the assistive technology your child needs. Let’s discuss the current status and next steps.' How do you respond?",
+      answers: [
+        {
+          text: "Ask for a clear timeline and discuss interim supports.",
+          feedback: {
+            positive: "Requesting a timeline and interim supports helps ensure your child isn't left without help and keeps the process moving.",
+            negative: "You may need to follow up to ensure the timeline is met, and interim supports may not fully meet your child's needs."
+          }
+        },
+        {
+          text: "Remind the team that your child has a right to access the curriculum with appropriate technology.",
+          feedback: {
+            positive: "Referencing rights can help ensure the school fulfills its obligations and takes the issue seriously.",
+            negative: "It may be seen as confrontational if not balanced with collaboration, and could slow down problem-solving."
+          }
+        },
+        {
+          text: "Request compensatory services if technology is not provided soon.",
+          feedback: {
+            positive: "Requesting compensatory services can help your child make up for lost learning time.",
+            negative: "It may require additional meetings and documentation, and could delay immediate solutions."
+          }
+        }
+      ]
+    },
+    {
+      question: "The school provides a timeline but there are further delays. What do you do?",
+      answers: [
+        {
+          text: "Request regular updates and written communication about progress.",
+          feedback: {
+            positive: "Regular updates keep you informed and create accountability.",
+            negative: "Frequent communication may be time-consuming and could strain relationships if not handled collaboratively."
+          }
+        },
+        {
+          text: "Ask for alternative or temporary technology solutions.",
+          feedback: {
+            positive: "Temporary solutions can help your child continue learning while waiting for the correct technology.",
+            negative: "Alternatives may not fully meet your child's needs and could be less effective."
+          }
+        },
+        {
+          text: "File a formal complaint with the district or state.",
+          feedback: {
+            positive: "Filing a complaint can prompt faster action if other steps fail.",
+            negative: "It may escalate the situation and affect your relationship with the school."
+          }
+        }
+      ]
+    },
+    {
+      question: "Once the technology is provided, your child struggles to use it effectively. What is your next step?",
+      answers: [
+        {
+          text: "Request training for your child and staff on how to use the technology.",
+          feedback: {
+            positive: "Training ensures everyone can use the technology effectively and supports your child's success.",
+            negative: "Arranging training may take additional time and resources."
+          }
+        },
+        {
+          text: "Monitor your child's progress and provide feedback to the team.",
+          feedback: {
+            positive: "Monitoring and feedback help the team make adjustments and ensure the technology is working as intended.",
+            negative: "It may take time to see improvements, and ongoing communication is needed."
+          }
+        },
+        {
+          text: "Ask for an evaluation to see if different technology is needed.",
+          feedback: {
+            positive: "An evaluation can help identify the best tools for your child and address ongoing challenges.",
+            negative: "Additional evaluations may delay support and require more meetings."
+          }
+        }
+      ]
+    }
+  ]
+},
+'custom-transportation': {
+  id: 'custom-transportation',
+  title: 'Transportation Challenges',
+  background: "Your child’s IEP includes transportation as a related service, but there have been issues with reliability and safety.",
+  steps: [
+    {
+      question: "The school says: 'We understand there have been some transportation issues. Let’s discuss how we can resolve them.' How do you respond?",
+      answers: [
+        {
+          text: "Review the transportation plan together and suggest improvements.",
+          feedback: {
+            positive: "Reviewing the plan encourages collaboration and problem-solving to address the issues.",
+            negative: "It may take time to see improvements and require ongoing communication and follow-up."
+          }
+        },
+        {
+          text: "Remind the team that your child has a right to safe and reliable transportation.",
+          feedback: {
+            positive: "Referencing rights can ensure the school takes the issue seriously and fulfills its obligations.",
+            negative: "It may come across as confrontational if not balanced with collaboration, and could slow down problem-solving."
+          }
+        },
+        {
+          text: "Say you will file a formal complaint if issues continue.",
+          feedback: {
+            positive: "Filing a complaint can prompt action if other steps fail and bring additional oversight.",
+            negative: "It may escalate the situation and affect your relationship with the school."
+          }
+        }
+      ]
+    },
+    {
+      question: "The school agrees to make changes to the transportation plan. What do you do next?",
+      answers: [
+        {
+          text: "Request regular updates on transportation performance.",
+          feedback: {
+            positive: "Regular updates keep you informed and create accountability for the school.",
+            negative: "Frequent communication may be time-consuming and could strain relationships if not handled collaboratively."
+          }
+        },
+        {
+          text: "Ask for a backup plan in case transportation fails again.",
+          feedback: {
+            positive: "A backup plan ensures your child is not left without transportation if issues arise.",
+            negative: "It may be difficult for the school to provide alternative arrangements on short notice."
+          }
+        },
+        {
+          text: "Monitor the situation and document any further issues.",
+          feedback: {
+            positive: "Documentation helps track patterns and provides evidence if further action is needed.",
+            negative: "It may take time to gather enough information to prompt additional changes."
+          }
+        }
+      ]
+    },
+    {
+      question: "Despite changes, problems with transportation continue. What is your next step?",
+      answers: [
+        {
+          text: "Request a meeting with district transportation officials.",
+          feedback: {
+            positive: "Involving district officials can bring additional resources and oversight to resolve the issue.",
+            negative: "It may take time to schedule and may escalate the situation."
+          }
+        },
+        {
+          text: "File a formal complaint with the district or state.",
+          feedback: {
+            positive: "A formal complaint can prompt a thorough review and corrective action.",
+            negative: "It may further strain your relationship with the school and could take time to resolve."
+          }
+        },
+        {
+          text: "Seek alternative transportation options outside the school.",
+          feedback: {
+            positive: "Alternative options may provide more reliable service for your child.",
+            negative: "This may be costly and the school may not reimburse you without prior agreement."
+          }
+        }
+      ]
+    }
+  ]
+},'custom-mental-health': {
+  id: 'custom-mental-health',
+  title: 'Mental Health Supports',
+  background: "Your child has been struggling with anxiety and depression, affecting their school performance. You want to ensure appropriate mental health supports are included in the IEP.",
+  steps: [
+    {
+      question: "The school says: 'We understand your concerns about your child's mental health. Let’s discuss what supports might help.' How do you respond?",
+      answers: [
+        {
+          text: "Work together to identify supports and accommodations.",
+          feedback: {
+            positive: "Collaboration ensures your child's needs are addressed holistically and encourages buy-in from the team.",
+            negative: "It may take time to find the right supports and require ongoing adjustments as your child's needs change."
+          }
+        },
+        {
+          text: "Request that mental health services be included in the IEP.",
+          feedback: {
+            positive: "Including services in the IEP makes them a formal part of your child's support plan and ensures accountability.",
+            negative: "It may require additional evaluations or meetings, and the school may have limited resources."
+          }
+        },
+        {
+          text: "Say you will seek outside evaluation and support if needs aren't met.",
+          feedback: {
+            positive: "Seeking outside support can provide additional resources and perspectives for your child.",
+            negative: "It may be costly and could complicate coordination with the school team."
+          }
+        }
+      ]
+    },
+    {
+      question: "The school agrees to add some supports, but your child is still struggling. What do you do next?",
+      answers: [
+        {
+          text: "Request a review of the IEP and consider additional services.",
+          feedback: {
+            positive: "Reviewing the IEP ensures it remains responsive to your child's needs and allows for timely adjustments.",
+            negative: "Frequent reviews may be time-consuming and could frustrate the team if not approached collaboratively."
+          }
+        },
+        {
+          text: "Ask for regular check-ins with a counselor or social worker.",
+          feedback: {
+            positive: "Regular check-ins can help monitor your child's well-being and provide ongoing support.",
+            negative: "Staffing limitations may make it difficult to provide frequent check-ins."
+          }
+        },
+        {
+          text: "Request a functional behavioral assessment.",
+          feedback: {
+            positive: "An assessment can help identify triggers and guide effective interventions.",
+            negative: "Assessments take time and may delay the implementation of new supports."
+          }
+        }
+      ]
+    },
+    {
+      question: "Your child begins to improve, but you want to ensure continued support. What is your next step?",
+      answers: [
+        {
+          text: "Request regular progress updates from the school.",
+          feedback: {
+            positive: "Progress updates help you stay informed and allow for early intervention if issues arise again.",
+            negative: "Frequent updates may require extra effort from staff and could be difficult to maintain long-term."
+          }
+        },
+        {
+          text: "Ask for a crisis plan to be included in the IEP.",
+          feedback: {
+            positive: "A crisis plan prepares the team to respond quickly if your child's mental health needs escalate.",
+            negative: "Developing a crisis plan may require additional meetings and careful planning."
+          }
+        },
+        {
+          text: "Continue outside counseling and coordinate with the school.",
+          feedback: {
+            positive: "Coordinating with outside providers ensures a consistent approach and maximizes support for your child.",
+            negative: "Coordination may be challenging due to privacy concerns or differing approaches."
+          }
+        }
+      ]
+    }
+  ]
+}
 };
